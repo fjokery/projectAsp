@@ -21,3 +21,23 @@
   </p>
 </div>
 
+
+<!-- ABOUT THE PROJECT -->
+## 🦖 About The Project
+
+This project exsists to learn ASP.
+
+It was divided into 5 different sections:
+* Section 1:
+* Section 2:
+* Section 3:
+* Section 4:
+* Section 5:
+
+Each section had different tasks assigned to contribute to creating a complete website.
+
+Open the project in `Visual studio` to see the result. 🌿
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
