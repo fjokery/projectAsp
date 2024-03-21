@@ -28,7 +28,7 @@
 This project exsists to learn ASP.
 
 It was divided into 5 different sections:
-* Section 1:
+* Section 1: Reasearch information 
 * Section 2:
 * Section 3:
 * Section 4:
