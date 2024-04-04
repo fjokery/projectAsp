@@ -29,7 +29,7 @@ This project exsists to learn ASP.
 
 It was divided into 5 different sections:
 * Section 1: Reasearch information 
-* Section 2:
+* Section 2: Make a simple "Hello world" on the website
 * Section 3:
 * Section 4:
 * Section 5:
