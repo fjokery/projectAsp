@@ -15,6 +15,14 @@ namespace projektASP.Controllers
 
         public IActionResult Index()
         {
+            string userIP = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+            if (!string.IsNullOrWhiteSpace(userIP))
+            {
+                SQlite.AddVisitor(userIP);
+            }
+            
+
             return View();
         }
 
@@ -33,5 +41,6 @@ namespace projektASP.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

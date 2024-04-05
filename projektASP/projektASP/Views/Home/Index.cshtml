@@ -7,10 +7,14 @@
     <p>
         Detta är vår hemsida<br> 
         
-        @DateTime.Now.ToString("yyyy-MM-dd  HH:mm")
+        @DateTime.Now.ToString("yyyy-MM-dd  HH:mm")<br>
+
+        Antal totala besökare: @SQlite.countVisitors()
 
     </p>
     <div style="width: 100%; display: flex; justify-content: center;">
         <partial name="_Slideshow.cshtml" />
     </div>
+
+    
 </div>
