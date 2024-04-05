@@ -1,7 +1,17 @@
+using Microsoft.Data.Sqlite;
+using projektASP.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+SqliteConnection sqlite_conn;
+sqlite_conn = SQlite.CreateConnection();
+SQlite.CreateTable(sqlite_conn);
+//InsertData(sqlite_conn);
+//ReadData(sqlite_conn);
+
 
 var app = builder.Build();
 
@@ -26,3 +36,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
