@@ -7,30 +7,43 @@
     <p>
         Detta är vår hemsida<br> 
         
-        @DateTime.Now.ToString("yyyy-MM-dd  HH:mm")<br>
+        @{/*Datumräknare*/}
+        @DateTime.Now.ToString("yyyy-MM-dd  HH:mm")
+        <br>
 
-        Antal totala besökare: @SQlite.countVisitors()
+        @{/*Besöksräknare*/}
+        Antal totala besök: @SQlite.countTotalVisitors()
+        <br>
+        Antal individuella besökare: @SQlite.countIndividualVisitors()
 
     </p>
 
+
+    @{/*Vädertiteltext*/}
     <h2 class="display-4">Weather</h2>
 
+    @{/*VäderAPI (snodd från internet)*/}
     <a class="weatherwidget-io" href="https://forecast7.com/en/55d3813d16/trelleborg/" data-label_1="TRELLEBORG" data-label_2="WEATHER" data-theme="original">TRELLEBORG WEATHER</a>
     <script>
         !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
     </script> 
     <br>
 
+    
+    @{/*Radiotext*/}
     <h2 class="display-4">Radio Trelleborg 😊</h2>
 
-    <audio controls autoplay>
+    @{/*Skapar en audioplayer som strömmar från Radio Trelleborgs sida*/}
+    <audio controls>
         <source src="https://stream.nsp.se/RaTbg_MP3_Lo" />
     </audio>
-    <br>
-    <br>
+    <br><br>
 
+
+    @{/*Bildspelstext*/}
     <h2 class="display-4">Bildspel</h2>
 
+    @{/*Bildspel*/}
     <div style="width: 100%; display: flex; justify-content: center;">
         <partial name="_Slideshow.cshtml" />
     </div>

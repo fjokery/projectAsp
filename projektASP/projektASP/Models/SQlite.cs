@@ -5,7 +5,7 @@ namespace projektASP.Models
     public class SQlite
     {
 
-
+        //Öppnar kontakten med databasen
         public static SqliteConnection CreateConnection()
         {
 
@@ -24,6 +24,7 @@ namespace projektASP.Models
             return sqlite_conn;
         }
 
+        //Skapar en ny tabell i databasen (används inte)
         public static void CreateTable(SqliteConnection conn)
         {
 
@@ -37,6 +38,7 @@ namespace projektASP.Models
 
         }
 
+        //Lägger till en sidbesökares IP och nuvarande DateTime i Visitors i databasen
         public static void AddVisitor(string userIP)
         {
             SqliteConnection conn = SQlite.CreateConnection();
@@ -44,18 +46,21 @@ namespace projektASP.Models
             string Createsql = "INSERT INTO Visitors(IP, VisitationDate) VALUES(@IP, @VisitationDate)";
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = Createsql;
+
             SqliteParameter IPparam = sqlite_cmd.CreateParameter();
             SqliteParameter Dateparam = sqlite_cmd.CreateParameter();
             IPparam.ParameterName = "IP";
             IPparam.Value = userIP;
             Dateparam.ParameterName = "VisitationDate";
             Dateparam.Value = @DateTime.Now;
+
             sqlite_cmd.Parameters.Add(IPparam);
             sqlite_cmd.Parameters.Add(Dateparam);
             sqlite_cmd.ExecuteNonQuery();
         }
 
-        public static long countVisitors()
+        //Returnerar totala antalet besökare (entrys i visitor)
+        public static long countTotalVisitors()
         {
             SqliteConnection conn = SQlite.CreateConnection();
             SqliteCommand sqlite_cmd;
@@ -64,6 +69,15 @@ namespace projektASP.Models
             return (long)sqlite_cmd.ExecuteScalar();
         }
 
+        //Returnerar antalet unika IP-adresser
+        public static long countIndividualVisitors()
+        {
+            SqliteConnection conn = SQlite.CreateConnection();
+            SqliteCommand sqlite_cmd;
+            sqlite_cmd = conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT COUNT(DISTINCT IP) FROM Visitors";
+            return (long)sqlite_cmd.ExecuteScalar();
+        }
 
     }
 }
