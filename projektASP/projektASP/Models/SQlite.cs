@@ -42,11 +42,14 @@ namespace projektASP.Models
         public static void AddVisitor(string userIP)
         {
             SqliteConnection conn = SQlite.CreateConnection();
+
+            //Skriver och skapar Queryn
             SqliteCommand sqlite_cmd;
             string Createsql = "INSERT INTO Visitors(IP, VisitationDate) VALUES(@IP, @VisitationDate)";
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = Createsql;
 
+            //Skapar parametrarna (variablerna)
             SqliteParameter IPparam = sqlite_cmd.CreateParameter();
             SqliteParameter Dateparam = sqlite_cmd.CreateParameter();
             IPparam.ParameterName = "IP";
@@ -54,8 +57,11 @@ namespace projektASP.Models
             Dateparam.ParameterName = "VisitationDate";
             Dateparam.Value = @DateTime.Now;
 
+            //Lägger in parametrarna
             sqlite_cmd.Parameters.Add(IPparam);
             sqlite_cmd.Parameters.Add(Dateparam);
+
+            //Kör Queryn med parametrar
             sqlite_cmd.ExecuteNonQuery();
         }
 
