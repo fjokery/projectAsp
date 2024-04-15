@@ -30,8 +30,8 @@ This project exsists to learn ASP.
 It was divided into 5 different sections:
 * Section 1: Reasearch information 
 * Section 2: Make a simple "Hello world" on the website
-* Section 3:
-* Section 4:
+* Section 3: Small website addons
+* Section 4: Make a login page & forum
 * Section 5:
 
 Each section had different tasks assigned to contribute to creating a complete website.
