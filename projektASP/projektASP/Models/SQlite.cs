@@ -44,10 +44,8 @@ namespace projektASP.Models
             SqliteConnection conn = SQlite.CreateConnection();
 
             //Skriver och skapar Queryn
-            SqliteCommand sqlite_cmd;
-            string Createsql = "INSERT INTO Visitors(IP, VisitationDate) VALUES(@IP, @VisitationDate)";
-            sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = Createsql;
+            SqliteCommand sqlite_cmd = conn.CreateCommand();
+            sqlite_cmd.CommandText = "INSERT INTO Visitors(IP, VisitationDate) VALUES(@IP, @VisitationDate)"; ;
 
             //Skapar parametrarna (variablerna)
             SqliteParameter IPparam = sqlite_cmd.CreateParameter();
@@ -83,6 +81,11 @@ namespace projektASP.Models
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = "SELECT COUNT(DISTINCT IP) FROM Visitors";
             return (long)sqlite_cmd.ExecuteScalar();
+        }
+
+        public static bool Login()
+        {
+            return true;
         }
 
     }
