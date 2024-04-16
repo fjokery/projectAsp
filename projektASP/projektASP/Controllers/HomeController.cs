@@ -31,12 +31,7 @@ namespace projektASP.Controllers
             return View();
         }
 
-        public IActionResult Test()
-        {
-            return View();
-        }
-
-        public IActionResult Login()
+        public IActionResult Forum()
         {
             return View();
         }
