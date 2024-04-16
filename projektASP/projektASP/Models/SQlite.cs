@@ -28,11 +28,11 @@ namespace projektASP.Models
         public static void CreateTable(SqliteConnection conn)
         {
 
-            SqliteCommand sqlite_cmd;
+            SqliteCommand cmd;
             string Createsql = "CREATE TABLE Visitors(IP VARCHAR(45), VisitationDate DATETIME)";
-            sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = Createsql;
-            sqlite_cmd.ExecuteNonQuery();
+            cmd = conn.CreateCommand();
+            cmd.CommandText = Createsql;
+            cmd.ExecuteNonQuery();
             //sqlite_cmd.CommandText = Createsql1;
             //sqlite_cmd.ExecuteNonQuery();
 
@@ -46,76 +46,74 @@ namespace projektASP.Models
             SqliteConnection conn = SQlite.CreateConnection();
 
             //Skriver och skapar Queryn
-            SqliteCommand sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = "INSERT INTO Visitors(IP, VisitationDate) VALUES(@IP, @VisitationDate)"; ;
+            SqliteCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "INSERT INTO Visitors(IP, VisitationDate) VALUES(@IP, @VisitationDate)"; ;
 
             //Skapar parametrarna (variablerna)
-            SqliteParameter IPparam = sqlite_cmd.CreateParameter();
-            SqliteParameter Dateparam = sqlite_cmd.CreateParameter();
+            SqliteParameter IPparam = cmd.CreateParameter();
+            SqliteParameter Dateparam = cmd.CreateParameter();
             IPparam.ParameterName = "IP";
             IPparam.Value = userIP;
             Dateparam.ParameterName = "VisitationDate";
             Dateparam.Value = @DateTime.Now;
 
             //Lägger in parametrarna
-            sqlite_cmd.Parameters.Add(IPparam);
-            sqlite_cmd.Parameters.Add(Dateparam);
+            cmd.Parameters.Add(IPparam);
+            cmd.Parameters.Add(Dateparam);
 
             //Kör Queryn med parametrar
-            sqlite_cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
         }
 
         //Returnerar totala antalet besökare (entrys i visitor)
         public static long countTotalVisitors()
         {
             SqliteConnection conn = SQlite.CreateConnection();
-            SqliteCommand sqlite_cmd;
-            sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = "SELECT COUNT(*) FROM Visitors";
-            return (long)sqlite_cmd.ExecuteScalar();
+            SqliteCommand cmd;
+            cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM Visitors";
+            return (long)cmd.ExecuteScalar();
         }
 
         //Returnerar antalet unika IP-adresser
         public static long countIndividualVisitors()
         {
             SqliteConnection conn = SQlite.CreateConnection();
-            SqliteCommand sqlite_cmd;
-            sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = "SELECT COUNT(DISTINCT IP) FROM Visitors";
-            return (long)sqlite_cmd.ExecuteScalar();
+            SqliteCommand cmd;
+            cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(DISTINCT IP) FROM Visitors";
+            return (long)cmd.ExecuteScalar();
         }
 
         //login
         public static bool Login(string username, string password)
         {
-            using (SqliteConnection conn = CreateConnection())
-            {
-                using (SqliteCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password";
-                    cmd.Parameters.AddWithValue("@Username", username);
-                    cmd.Parameters.AddWithValue("@Password", password);
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-            }
+            SqliteConnection conn = CreateConnection();
+            SqliteCommand cmd = conn.CreateCommand();
+                
+            cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password";
+            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@Password", password);
+
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            return count > 0;
         }
 
         //registerara anv'ndare
         public static bool Register(string username, string email, string password)
         {
-            using (SqliteConnection conn = CreateConnection())
-            {
-                using (SqliteCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "INSERT INTO Users (Username, Email, Password) VALUES (@Username, @Email, @Password)";
-                    cmd.Parameters.AddWithValue("@Username", username);
-                    cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Parameters.AddWithValue("@Password", password);
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
-                }
-            }
+            SqliteConnection conn = CreateConnection();
+            SqliteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "INSERT INTO Users (Username, Email, Password) VALUES (@Username, @Email, @Password)";
+            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@Password", password);
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+            return rowsAffected > 0;
+                
+            
         }
 
     }

@@ -3,34 +3,34 @@
 }
 
 <div style="display: flex; gap: 100px; justify-content: center;">
- <div style="display: flex; flex-direction: column;">
+    <div style="display: flex; flex-direction: column;">
 
-<h1>Login</h1>
-Username <br />
-<input name="usernameInput"/>
-<br />
-Password <br />
-<input name="passwordInput" type="password"/>
-<br />
+        <h1>Login</h1>
+        Username <br />
+        <input id="usernameInput" type="text"/>
+        <br />
+        Password <br />
+        <input id="passwordInput" type="password"/>
+        <br />
 
-<!--- parametrar -->
-<a href="@SQlite.Login()">Login</a>
-</div>
+        <!--- parametrar -->
+        <a href="@SQlite.Login()">Login</a>
+    </div>
     
 
     <div style="display: flex; flex-direction: column;">
 
-        <h1>Register</h1>
-    Username <br />
-    <input name="usernameInput" />
-    <br />
-    Email <br />
-    <input name="emailInput" />
-    <br />
-    Password <br />
-    <input name="passwordInput" type="password" />
-    <br />
-        <!--- parametrar -->
-    <a href="@SQlite.Register()">Register</a>
+            <h1>Register</h1>
+        Username <br />
+        <input name="usernameInput" />
+        <br />
+        Email <br />
+        <input name="emailInput" />
+        <br />
+        Password <br />
+        <input name="passwordInput" type="password" />
+        <br />
+            <!--- parametrar -->
+        <a href="@SQlite.Register()">Register</a>
     </div>
 </div>
