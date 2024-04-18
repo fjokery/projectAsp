@@ -34,7 +34,9 @@
                     </ul>
                 </div>
 
-                <a class="nav-link text-dark loginButton" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                @SQlite.loggedInUser
+                <a class="nav-link text-dark loginButton" style="visibility: @SQlite.LoginOrUser();" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                <a class="nav-link text-dark loginButton" style="visibility: @SQlite.ShowLogoutButton();" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
 
             </div>
         </nav>

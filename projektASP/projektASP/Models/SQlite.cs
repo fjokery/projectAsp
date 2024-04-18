@@ -1,11 +1,12 @@
 ﻿using Microsoft.Data.Sqlite;
+using System.Runtime.InteropServices;
 
 namespace projektASP.Models
 {
     public class SQlite
     {
 
-        public static bool loggedin = false;
+        public static string loggedInUser = null;
 
         //Öppnar kontakten med databasen
         public static SqliteConnection CreateConnection()
@@ -98,7 +99,7 @@ namespace projektASP.Models
 
             if (count > 0)
             {
-                loggedin = true;
+                loggedInUser = username;
                 return true;
             }
             else
@@ -121,9 +122,34 @@ namespace projektASP.Models
             cmd.Parameters.AddWithValue("@Password", password);
 
             int rowsAffected = cmd.ExecuteNonQuery();
-            return rowsAffected > 0;
-                
-            
+
+            if (rowsAffected > 0)
+            {
+                loggedInUser = username;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string LoginOrUser() 
+        {
+            if (loggedInUser == null)
+            {
+                return "visible";
+            }
+            else { return "hidden"; }
+        }
+
+        public static string ShowLogoutButton()
+        {
+            if (loggedInUser != null)
+            {
+                return "visible";
+            }
+            else { return "hidden"; }
         }
 
     }

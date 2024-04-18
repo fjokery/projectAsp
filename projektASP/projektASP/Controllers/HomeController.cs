@@ -43,7 +43,13 @@ namespace projektASP.Controllers
             return View();
         }
 
-        public IActionResult LoginÍn()
+        public void Logout()
+        {
+            SQlite.loggedInUser = null;
+            Response.Redirect("Index");
+        }
+
+        public IActionResult LoginIn()
         {
 
 
@@ -79,6 +85,19 @@ namespace projektASP.Controllers
                 string username = Request.Form["regUsernameInput"];
                 string email = Request.Form["regEmailInput"];
                 string password = Request.Form["regPasswordInput"];
+
+                bool isAuthenticated = SQlite.Register(username, email, password);
+
+                if (isAuthenticated)
+                {
+                    Response.Redirect("Index");
+                }
+                else
+                {
+                    Console.WriteLine("Something went wrong");
+                    Response.Redirect("Login");
+                }
+
             }
         }
 
