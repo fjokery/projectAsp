@@ -5,6 +5,8 @@ namespace projektASP.Models
     public class SQlite
     {
 
+        public static bool loggedin = false;
+
         //Öppnar kontakten med databasen
         public static SqliteConnection CreateConnection()
         {
@@ -29,13 +31,10 @@ namespace projektASP.Models
         {
 
             SqliteCommand cmd;
-            string Createsql = "CREATE TABLE Visitors(IP VARCHAR(45), VisitationDate DATETIME)";
+            string Createsql = "CREATE TABLE Users(Username TEXT, Email TEXT, Password TEXT)";
             cmd = conn.CreateCommand();
             cmd.CommandText = Createsql;
             cmd.ExecuteNonQuery();
-            //sqlite_cmd.CommandText = Createsql1;
-            //sqlite_cmd.ExecuteNonQuery();
-
         }
 
 
@@ -96,7 +95,18 @@ namespace projektASP.Models
             cmd.Parameters.AddWithValue("@Password", password);
 
             int count = Convert.ToInt32(cmd.ExecuteScalar());
-            return count > 0;
+
+            if (count > 0)
+            {
+                loggedin = true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            
         }
 
         //registerara anv'ndare

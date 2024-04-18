@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using projektASP.Models;
 using System.Diagnostics;
+using System.Web;
 
 namespace projektASP.Controllers
 {
@@ -38,7 +39,47 @@ namespace projektASP.Controllers
 
         public IActionResult Login()
         {
+
             return View();
+        }
+
+        public IActionResult LoginÍn()
+        {
+
+
+            return View(); 
+        }
+
+        public void OnLogin()
+        {
+            if (Request.Method == "POST")
+            {
+                string username = Request.Form["usernameInput"];
+                string password = Request.Form["passwordInput"];
+
+                bool isAuthenticated = SQlite.Login(username, password);
+                if (isAuthenticated)
+                {
+                    // Redirect user to dashboard or another page upon successful login
+                    Response.Redirect("Index");
+                }
+                else
+                {
+                    // Handle failed login attempt (e.g., display error message)
+                    Console.WriteLine("lol no");
+                    Response.Redirect("Login");
+                }
+            }
+        }
+
+        public void OnRegister()
+        {
+            if(Request.Method == "POST")
+            {
+                string username = Request.Form["regUsernameInput"];
+                string email = Request.Form["regEmailInput"];
+                string password = Request.Form["regPasswordInput"];
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
