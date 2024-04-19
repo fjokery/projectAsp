@@ -107,7 +107,6 @@ namespace projektASP.Models
                 return false;
             }
 
-            
         }
 
         //registerara anv'ndare
