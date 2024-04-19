@@ -49,12 +49,6 @@ namespace projektASP.Controllers
             Response.Redirect("Index");
         }
 
-        public IActionResult LoginIn()
-        {
-
-
-            return View(); 
-        }
 
         public void OnLogin()
         {
