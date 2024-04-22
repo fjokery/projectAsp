@@ -1,0 +1,20 @@
+@if(SQlite.loggedInUser != null)
+{
+	<p>HEJ @SQlite.loggedInUser</p>
+
+
+	<form action="">
+		<label for="fname">@SQlite.loggedInUser</label><br>
+		<input type="text" id="text" name="text"><br>
+		<input type="submit" value="Submit">
+	</form>
+
+
+
+
+
+
+} else
+{
+	<p>Oobs! måste logga in innan du kan se forum!</p>
+}
