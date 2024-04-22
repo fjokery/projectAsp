@@ -32,7 +32,7 @@ namespace projektASP.Controllers
             return View();
         }
 
-        public IActionResult Forum()
+        public IActionResult hej()
         {
             return View();
         }
