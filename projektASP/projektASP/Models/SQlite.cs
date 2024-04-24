@@ -1,6 +1,7 @@
-﻿using Azure;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Data.Sqlite;
 using projektASP.Controllers;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 
 namespace projektASP.Models
@@ -132,23 +133,28 @@ namespace projektASP.Models
             }
         }
 
-        public static string LoginOrUser() 
+        public static string LoginOrUser(HttpContext httpContext) 
         {
-            string username = new HomeController.GetUsername();
-            if (HomeController.GetUsername() == null)
+            if (SQlite.GetUsername(httpContext) == null)
             {
                 return "visible";
             }
             else { return "hidden"; }
         }
 
-        public static string ShowLogoutButton()
+        public static string ShowLogoutButton(HttpContext httpContext)
         {
-            if (loggedInUser != null)
+
+            if (SQlite.GetUsername(httpContext) != null)
             {
                 return "visible";
             }
             else { return "hidden"; }
+        }
+
+        public static string GetUsername(HttpContext httpContext)
+        {
+            return httpContext.Request.Cookies["Username"];
         }
 
     }

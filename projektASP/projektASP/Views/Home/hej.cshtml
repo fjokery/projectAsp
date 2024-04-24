@@ -1,10 +1,10 @@
-@if(SQlite.loggedInUser != null)
+@if (SQlite.GetUsername(Context) != null)
 {
-	<p>HEJ @SQlite.loggedInUser</p>
+	<p>HEJ @SQlite.GetUsername(Context)</p>
 
 
 	<form action="">
-		<label for="fname">@SQlite.loggedInUser</label><br>
+		<label for="fname">@SQlite.GetUsername(Context)</label><br>
 		<input type="text" id="text" name="text"><br>
 		<input type="submit" value="Submit">
 	</form>

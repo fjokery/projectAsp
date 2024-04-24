@@ -10,7 +10,6 @@ builder.Services.AddControllersWithViews();
 SqliteConnection conn = SQlite.CreateConnection();
 //SQlite.CreateTable(conn);
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +31,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();
 

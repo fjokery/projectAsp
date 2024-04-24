@@ -51,7 +51,7 @@ namespace projektASP.Controllers
 
 		public void Logout()
         {
-            SQlite.loggedInUser = null;
+            Response.Cookies.Append("Username", null);
             Response.Redirect("Index");
         }
 
@@ -103,10 +103,7 @@ namespace projektASP.Controllers
             }
         }
 
-        public string GetUsername()
-        {
-            return Request.Cookies["Username"];
-        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
