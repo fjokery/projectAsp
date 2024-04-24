@@ -60,6 +60,8 @@ namespace projektASP.Controllers
                 bool isAuthenticated = SQlite.Login(username, password);
                 if (isAuthenticated)
                 {
+                    //Saves username cookie
+                    Response.Cookies.Append("Username", username);
                     // Redirect user to dashboard or another page upon successful login
                     Response.Redirect("Index");
                 }
@@ -93,6 +95,11 @@ namespace projektASP.Controllers
                 }
 
             }
+        }
+
+        public string GetUsername()
+        {
+            return Request.Cookies["Username"];
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

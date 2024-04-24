@@ -1,12 +1,12 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Azure;
+using Microsoft.Data.Sqlite;
+using projektASP.Controllers;
 using System.Runtime.InteropServices;
 
 namespace projektASP.Models
 {
     public class SQlite
     {
-
-        public static string loggedInUser = null;
 
         //Öppnar kontakten med databasen
         public static SqliteConnection CreateConnection()
@@ -99,7 +99,6 @@ namespace projektASP.Models
 
             if (count > 0)
             {
-                loggedInUser = username;
                 return true;
             }
             else
@@ -124,7 +123,7 @@ namespace projektASP.Models
 
             if (rowsAffected > 0)
             {
-                loggedInUser = username;
+                Login(username, password);
                 return true;
             }
             else
@@ -135,7 +134,8 @@ namespace projektASP.Models
 
         public static string LoginOrUser() 
         {
-            if (loggedInUser == null)
+            string username = new HomeController.GetUsername();
+            if (HomeController.GetUsername() == null)
             {
                 return "visible";
             }
