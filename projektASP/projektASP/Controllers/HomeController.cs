@@ -43,7 +43,13 @@ namespace projektASP.Controllers
             return View();
         }
 
-        public void Logout()
+		public IActionResult redirect()
+		{
+
+			return View();
+		}
+
+		public void Logout()
         {
             SQlite.loggedInUser = null;
             Response.Redirect("Index");
@@ -63,7 +69,7 @@ namespace projektASP.Controllers
                     //Saves username cookie
                     Response.Cookies.Append("Username", username);
                     // Redirect user to dashboard or another page upon successful login
-                    Response.Redirect("Index");
+                    Response.Redirect("redirect");
                 }
                 else
                 {
