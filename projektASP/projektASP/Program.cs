@@ -8,7 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 SqliteConnection conn = SQlite.CreateConnection();
+//För att skapa ett nytt table:
 //SQlite.CreateTable(conn);
+
+//För att tömma ett table:
+//SQlite.EmptyTable();
 
 var app = builder.Build();
 

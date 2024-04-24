@@ -2,19 +2,42 @@
 {
 	<p>HEJ @SQlite.GetUsername(Context)</p>
 
-
-	<form action="">
+	<form method="post" asp-controller="Home" asp-action="CreatePost">
 		<label for="fname">@SQlite.GetUsername(Context)</label><br>
-		<input type="text" id="text" name="text"><br>
+		<br />
+		<p>Titel</p>
+		<input type="text" name="title" size="40" maxlength="100"/><br />
+		<br />
+		<p>Text</p>
+		<input type="text" name="text" size="80" maxlength="400" style="height: 30px;"><br>
+		<br />
 		<input type="submit" value="Submit">
 	</form>
-
-
-
-
+	<br />
+	<p>--------------------------------------------------</p>
 
 
 } else
 {
 	<p>Oobs! måste logga in för att posta i forumet!</p>
+}
+
+<!--final posts goes here-->
+
+@{
+	for (int i = (int)SQlite.GetTotalPostAmount(); i > 0; i--)
+	{
+		if (SQlite.GetPostText(i) == null || SQlite.GetPostText(i) == ""){ continue; }
+
+		<h3>@SQlite.GetPostUser(i)</h3>
+		<br />
+		<p>@SQlite.GetPostTime(i)</p>
+		<br />
+		<h2>@SQlite.GetPostTitle(i)</h2>
+		<br />
+		<p>@SQlite.GetPostText(i)</p>
+		<br />
+		<p>--------------------------------------------------</p>
+		<br />
+	}
 }

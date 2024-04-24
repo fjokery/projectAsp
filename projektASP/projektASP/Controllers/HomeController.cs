@@ -49,42 +49,46 @@ namespace projektASP.Controllers
 			return View();
 		}
 
+        //Resettar användarnamnscookien vilket loggar ut en
 		public void Logout()
         {
-            Response.Cookies.Append("Username", null);
+            Response.Cookies.Append("Username", "");
             Response.Redirect("Index");
         }
 
-
+        //Kollar om man kan logga in
         public void OnLogin()
         {
             if (Request.Method == "POST")
             {
+                //Tar användarnamn och lösenord från textrutor på loginsidan
                 string username = Request.Form["usernameInput"];
                 string password = Request.Form["passwordInput"];
 
                 bool isAuthenticated = SQlite.Login(username, password);
                 if (isAuthenticated)
                 {
-                    //Saves username cookie
+                    //Sparar användarnamnet i en cookie
                     Response.Cookies.Append("Username", username);
-                    // Redirect user to dashboard or another page upon successful login
-                    Response.Redirect("redirect");
+                    //Skickar en till indexsidan
+                    Response.Redirect("Index");
                 }
                 else
                 {
-                    // Handle failed login attempt (e.g., display error message)
-                    Console.WriteLine("lol no");
+                    //Om inloggningen misslyckades
+                    Console.WriteLine("Fel användarnamn eller lösenord");
                     Response.Redirect("Login");
                 }
             }
         }
 
+        //Registrerar och loggar in en
         public void OnRegister()
         {
             if(Request.Method == "POST")
             {
-                string username = Request.Form["regUsernameInput"];
+				//Tar användarnamn mail och lösenord från textrutor på loginsidan
+				string username = Request.Form["regUsernameInput"];
                 string email = Request.Form["regEmailInput"];
                 string password = Request.Form["regPasswordInput"];
 
@@ -96,12 +100,35 @@ namespace projektASP.Controllers
                 }
                 else
                 {
-                    Console.WriteLine("Something went wrong");
+                    Console.WriteLine("Registrering misslyckades");
                     Response.Redirect("Login");
                 }
 
             }
         }
+
+        public void CreatePost()
+        {
+			if (Request.Method == "POST")
+			{
+                //Tar titel och text från textrutor
+				string title = Request.Form["title"];
+				string text = Request.Form["text"];
+
+				bool posted = SQlite.CreatePost(title, text, Request.Cookies["Username"]);
+
+				if (posted)
+				{
+					Response.Redirect("Hej");
+				}
+				else
+				{
+					Console.WriteLine("Something went wrong");
+					Response.Redirect("Index");
+				}
+
+			}
+		}
 
 
 
