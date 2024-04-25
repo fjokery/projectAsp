@@ -32,7 +32,7 @@ It was divided into 5 different sections:
 * Section 2: Make a simple "Hello world" on the website
 * Section 3: Small website addons
 * Section 4: Make a login page & forum
-* Section 5:
+* Section 5: Make website with theme
 
 Each section had different tasks assigned to contribute to creating a complete website.
 
