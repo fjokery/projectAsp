@@ -4,6 +4,7 @@ using projektASP.Controllers;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace projektASP.Models
 {
@@ -96,15 +97,36 @@ namespace projektASP.Models
             return (long)cmd.ExecuteScalar();
         }
 
+        public static string HashPassword(string password)
+        {
+			// Generate a 128-bit salt using a sequence of
+			// cryptographically strong random bytes.
+			byte[] salt = 1; // divide by 8 to convert bits to bytes
+
+			// derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
+			string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+				password: password!,
+				salt: salt,
+				prf: KeyDerivationPrf.HMACSHA256,
+				iterationCount: 100000,
+				numBytesRequested: 256 / 8));
+
+            return hashedPassword;
+		}
+
+
+
         //login
         public static bool Login(string username, string password)
         {
+            string hashedPassword = HashPassword(password);
+
             SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
                 
             cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password";
             cmd.Parameters.AddWithValue("@Username", username);
-            cmd.Parameters.AddWithValue("@Password", password);
+            cmd.Parameters.AddWithValue("@Password", hashedPassword);
 
             int count = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -122,19 +144,21 @@ namespace projektASP.Models
         //registerara anv'ndare
         public static bool Register(string username, string email, string password)
         {
-            SqliteConnection conn = CreateConnection();
+            string hashedPassword = HashPassword(password);
+
+			SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
 
             cmd.CommandText = "INSERT INTO Users (Username, Email, Password) VALUES (@Username, @Email, @Password)";
             cmd.Parameters.AddWithValue("@Username", username);
             cmd.Parameters.AddWithValue("@Email", email);
-            cmd.Parameters.AddWithValue("@Password", password);
+            cmd.Parameters.AddWithValue("@Password", hashedPassword);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
             if (rowsAffected > 0)
             {
-                Login(username, password);
+                Login(username, hashedPassword);
                 return true;
             }
             else
