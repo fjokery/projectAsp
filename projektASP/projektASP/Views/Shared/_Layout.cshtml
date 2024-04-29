@@ -19,7 +19,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow ">
             <div class="container-fluid">
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -43,8 +43,8 @@
                         @SQlite.GetUsername(Context)
 
 
-                        <a class="nav-link text-dark loginButton" style="visibility: @SQlite.LoginOrUser(Context)" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                        <a class="nav-link text-dark loginButton" style="visibility: @SQlite.ShowLogoutButton(Context)" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                        <a class="nav-link text-dark loginButton" style="display: @SQlite.LoginOrUser(Context)" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        <a class="nav-link text-dark loginButton" style="display: @SQlite.ShowLogoutButton(Context)" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
 
                     </ul>
 
@@ -53,7 +53,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

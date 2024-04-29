@@ -173,9 +173,9 @@ namespace projektASP.Models
         {
             if (SQlite.GetUsername(httpContext) == null)
             {
-                return "visible";
+                return "block";
             }
-            else { return "hidden"; }
+            else { return "none"; }
         }
 
         //Returnerar om Logoutknappen ska visas
@@ -184,9 +184,9 @@ namespace projektASP.Models
 
             if (SQlite.GetUsername(httpContext) != null)
             {
-                return "visible";
+                return "block";
             }
-            else { return "hidden"; }
+            else { return "none"; }
         }
 
         //Returnerar användarnamnet sparat i en cookie
