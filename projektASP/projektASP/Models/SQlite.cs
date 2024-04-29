@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Text;
 
 namespace projektASP.Models
 {
@@ -97,11 +98,11 @@ namespace projektASP.Models
             return (long)cmd.ExecuteScalar();
         }
 
-        public static string HashPassword(string password)
+        public static string HashPassword(string username, string password)
         {
 			// Generate a 128-bit salt using a sequence of
 			// cryptographically strong random bytes.
-			byte[] salt = 1; // divide by 8 to convert bits to bytes
+			byte[] salt = Encoding.ASCII.GetBytes(username); // divide by 8 to convert bits to bytes
 
 			// derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
 			string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -119,7 +120,7 @@ namespace projektASP.Models
         //login
         public static bool Login(string username, string password)
         {
-            string hashedPassword = HashPassword(password);
+            string hashedPassword = HashPassword(username, password);
 
             SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
@@ -144,7 +145,7 @@ namespace projektASP.Models
         //registerara anv'ndare
         public static bool Register(string username, string email, string password)
         {
-            string hashedPassword = HashPassword(password);
+            string hashedPassword = HashPassword(username, password);
 
 			SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
