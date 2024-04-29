@@ -1,5 +1,4 @@
-﻿@using projektASP.Controllers
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,12 +7,21 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/projektASP.styles.css" asp-append-version="true" />
+    <style>
+        .navbar-brand,
+        .navbar-nav {
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">projektASP</a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,20 +34,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="hej">Forum</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="inget">Privacy</a>
-                        </li>
+                        <!--Den här ska bytas ut mot en logotyp som man kan klicka och komma till home! (därmed behöver vi inte "home" knappen och kan utnyttja den till annat-->
+                        <!--OBS! den ska ligga i mitten-->
+                        <a class="navbar-item" asp-area="" asp-controller="Home" asp-action="Index">projektASP</a> 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @SQlite.GetUsername(Context)
+
+
+                        <a class="nav-link text-dark loginButton" style="visibility: @SQlite.LoginOrUser(Context)" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        <a class="nav-link text-dark loginButton" style="visibility: @SQlite.ShowLogoutButton(Context)" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+
                     </ul>
+
                 </div>
-                @SQlite.GetUsername(Context)
-
-
-                <a class="nav-link text-dark loginButton" style="visibility: @SQlite.LoginOrUser(Context)" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                <a class="nav-link text-dark loginButton" style="visibility: @SQlite.ShowLogoutButton(Context)" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
-
+               
             </div>
         </nav>
     </header>
@@ -49,7 +59,7 @@
         </main>
     </div>
 
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

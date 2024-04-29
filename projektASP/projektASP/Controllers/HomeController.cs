@@ -49,7 +49,7 @@ namespace projektASP.Controllers
 			return View();
 		}
 
-        //Resettar användarnamnscookien vilket loggar ut en
+        //Resettar anvï¿½ndarnamnscookien vilket loggar ut en
 		public void Logout()
         {
             Response.Cookies.Append("Username", "");
@@ -61,14 +61,14 @@ namespace projektASP.Controllers
         {
             if (Request.Method == "POST")
             {
-                //Tar användarnamn och lösenord från textrutor på loginsidan
+                //Tar anvï¿½ndarnamn och lï¿½senord frï¿½n textrutor pï¿½ loginsidan
                 string username = Request.Form["usernameInput"];
                 string password = Request.Form["passwordInput"];
 
                 bool isAuthenticated = SQlite.Login(username, password);
                 if (isAuthenticated)
                 {
-                    //Sparar användarnamnet i en cookie
+                    //Sparar anvï¿½ndarnamnet i en cookie
                     Response.Cookies.Append("Username", username);
                     //Skickar en till indexsidan
                     Response.Redirect("Index");
@@ -76,7 +76,7 @@ namespace projektASP.Controllers
                 else
                 {
                     //Om inloggningen misslyckades
-                    Console.WriteLine("Fel användarnamn eller lösenord");
+                    Console.WriteLine("Fel anvï¿½ndarnamn eller lï¿½senord");
                     Response.Redirect("Login");
                 }
             }
@@ -87,7 +87,7 @@ namespace projektASP.Controllers
         {
             if(Request.Method == "POST")
             {
-				//Tar användarnamn mail och lösenord från textrutor på loginsidan
+				//Tar anvï¿½ndarnamn mail och lï¿½senord frï¿½n textrutor pï¿½ loginsidan
 				string username = Request.Form["regUsernameInput"];
                 string email = Request.Form["regEmailInput"];
                 string password = Request.Form["regPasswordInput"];
@@ -111,7 +111,7 @@ namespace projektASP.Controllers
         {
 			if (Request.Method == "POST")
 			{
-                //Tar titel och text från textrutor
+                //Tar titel och text frï¿½n textrutor
 				string title = Request.Form["title"];
 				string text = Request.Form["text"];
 
