@@ -1,11 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
 
 <link rel="stylesheet" href="~/css/index.css" />
 
 <div class="mainBackground">
 
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+
+
+    <div class="text-center">
+        <h1 class="display-4">Testing!  @SQlite.GetUsername(Context) </h1>
+    </div>
 
 
 </div>
