@@ -47,7 +47,7 @@ namespace projektASP.Models
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "DELETE FROM Forum";
+            cmd.CommandText = "DELETE FROM Users";
             cmd.ExecuteNonQuery();
 		}
 
