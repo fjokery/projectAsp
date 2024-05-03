@@ -8,8 +8,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
-.text-center {
+.front-text-center {
     text-align: center;
 }
