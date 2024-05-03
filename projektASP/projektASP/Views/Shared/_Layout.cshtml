@@ -20,22 +20,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white fontText" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="hej">Forum</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="hej">Forum</a>
                         </li>
                         <!--Den här ska bytas ut mot en logotyp som man kan klicka och komma till home! (därmed behöver vi inte "home" knappen och kan utnyttja den till annat-->
                         <!--OBS! den ska ligga i mitten-->
                         <a class="navbar-item" asp-area="" asp-controller="Home" asp-action="Index">projektASP</a> 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         @SQlite.GetUsername(Context)
 
 
-                        <a class="nav-link text-dark loginButton" style="display: @SQlite.LoginOrUser(Context)" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                        <a class="nav-link text-dark loginButton" style="display: @SQlite.ShowLogoutButton(Context)" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                        <a class="nav-link text-white loginButton" style="display: @SQlite.LoginOrUser(Context)" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        <a class="nav-link text-white loginButton" style="display: @SQlite.ShowLogoutButton(Context)" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
 
                     </ul>
 
