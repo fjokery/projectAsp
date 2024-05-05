@@ -91,8 +91,9 @@ namespace projektASP.Controllers
 				string username = Request.Form["regUsernameInput"];
                 string email = Request.Form["regEmailInput"];
                 string password = Request.Form["regPasswordInput"];
+                int avatar = Int32.Parse(Request.Form["regAvatarInput"]);
 
-                bool isAuthenticated = SQlite.Register(username, email, password);
+                bool isAuthenticated = SQlite.Register(username, email, password, avatar);
 
                 if (isAuthenticated)
                 {

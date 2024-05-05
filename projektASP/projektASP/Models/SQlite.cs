@@ -41,6 +41,17 @@ namespace projektASP.Models
             cmd.ExecuteNonQuery();
         }
 
+
+        //Skapa nytt fält (använd inte)
+        public static void CreateField(SqliteConnection conn)
+        {
+            SqliteCommand cmd;
+            string Createsql = "ALTER TABLE Users ADD Avatar INT";
+            cmd = conn.CreateCommand();
+            cmd.CommandText = Createsql;
+            cmd.ExecuteNonQuery();
+        }
+
         //Tömmer en tabell (ANVÄND INTE)
         public static void EmptyTable()
         {
@@ -143,17 +154,18 @@ namespace projektASP.Models
         }
 
         //registerara anv'ndare
-        public static bool Register(string username, string email, string password)
+        public static bool Register(string username, string email, string password, int avatar)
         {
             string hashedPassword = HashPassword(username, password);
 
 			SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "INSERT INTO Users (Username, Email, Password) VALUES (@Username, @Email, @Password)";
+            cmd.CommandText = "INSERT INTO Users (Username, Email, Password, Avatar) VALUES (@Username, @Email, @Password, @Avatar)";
             cmd.Parameters.AddWithValue("@Username", username);
             cmd.Parameters.AddWithValue("@Email", email);
             cmd.Parameters.AddWithValue("@Password", hashedPassword);
+            cmd.Parameters.AddWithValue("@Avatar", avatar);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
