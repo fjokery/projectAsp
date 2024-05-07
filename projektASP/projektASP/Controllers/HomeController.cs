@@ -43,7 +43,13 @@ namespace projektASP.Controllers
             return View();
         }
 
-		public IActionResult redirect()
+        public IActionResult Register()
+        {
+
+            return View();
+        }
+
+        public IActionResult redirect()
 		{
 
 			return View();
