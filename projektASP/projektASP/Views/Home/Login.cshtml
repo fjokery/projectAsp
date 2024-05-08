@@ -1,28 +1,39 @@
 @using projektASP.Controllers
+
+<link rel="stylesheet" href="~/css/base.css" />
+<link rel="stylesheet" href="~/css/Login-register.css" />
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div style="display: flex; gap: 100px; justify-content: center;">
-    <div style="display: flex; flex-direction: column;">
+
+<div class="mainBackground" style="background-image: url('/Pictures/Login-Register/login-sky-background.png');">
+
+    <div class="login-reg-box">
+    <div style="display: flex; gap: 100px; justify-content: center;">
+        <div style="display: flex; flex-direction: column;">
 
 
-        <form method="post" asp-controller="Home" asp-action="OnLogin">
-            <h1>Login</h1>
-            Username <br />
-            <input name="usernameInput" type="text"/>
-            <br />
-            Password <br />
-            <input name="passwordInput" type="password" />
-            <br />
-            <button type="submit">Login</button>
-            
-        </form>
-        <a href="Register">link text</a>
+            <form method="post" asp-controller="Home" asp-action="OnLogin">
+                <h1>Login</h1>
+                Username <br />
+                <input name="usernameInput" type="text" />
+                <br />
+                Password <br />
+                <input name="passwordInput" type="password" />
+                <br />
+                <button type="submit">Login</button>
+
+            </form>
+            <a href="Register">link text</a>
 
 
 
+            </div>
+        </div>
 
     </div>
-    
+
 </div>
+
+
