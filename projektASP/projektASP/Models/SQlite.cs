@@ -161,8 +161,8 @@ namespace projektASP.Models
 
 			command.CommandText = "SELECT * FROM Users WHERE Username = @Username";
 			command.Parameters.AddWithValue("@Username", username);
-			int found = command.ExecuteNonQuery();
-            if(found == -1)
+			var found = command.ExecuteScalar();
+            if(found != null)
             {
                 Console.WriteLine("Användaren finns redan");
                 return false;
