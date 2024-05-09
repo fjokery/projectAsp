@@ -156,12 +156,24 @@ namespace projektASP.Models
         //registerara anv'ndare
         public static bool Register(string username, string email, string password, int avatar)
         {
-            string hashedPassword = HashPassword(username, password);
-
 			SqliteConnection conn = CreateConnection();
-            SqliteCommand cmd = conn.CreateCommand();
+			SqliteCommand command = conn.CreateCommand();
 
-            cmd.CommandText = "INSERT INTO Users (Username, Email, Password, Avatar) VALUES (@Username, @Email, @Password, @Avatar)";
+			command.CommandText = "SELECT * FROM Users WHERE Username = @Username";
+			command.Parameters.AddWithValue("@Username", username);
+			int found = command.ExecuteNonQuery();
+            if(found == -1)
+            {
+                Console.WriteLine("Användaren finns redan");
+                return false;
+            }
+
+
+			string hashedPassword = HashPassword(username, password);
+
+			SqliteCommand cmd = conn.CreateCommand();
+
+			cmd.CommandText = "INSERT INTO Users (Username, Email, Password, Avatar) VALUES (@Username, @Email, @Password, @Avatar)";
             cmd.Parameters.AddWithValue("@Username", username);
             cmd.Parameters.AddWithValue("@Email", email);
             cmd.Parameters.AddWithValue("@Password", hashedPassword);
