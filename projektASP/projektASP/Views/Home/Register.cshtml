@@ -1,17 +1,63 @@
 
-<div style="display: flex; flex-direction: column;">
+@using projektASP.Controllers
 
-    <form method="post" asp-controller="Home" asp-action="OnRegister">
-        <h1>Register</h1>
-        Username <br />
-        <input name="regUsernameInput" type="text" />
-        <br />
-        Email <br />
-        <input name="regEmailInput" type="email" />
-        <br />
-        Password <br />
-        <input name="regPasswordInput" type="password" />
-        <br />
-        <button type="submit">Register</button>
-    </form>
+<link rel="stylesheet" href="~/css/base.css" />
+<link rel="stylesheet" href="~/css/Login-register.css" />
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="mainBackground" style="background-image: url('/Pictures/Login-Register/login-sky-background.png');">
+
+<div class="login-reg-box">
+    <div style="display: flex; gap: 100px; justify-content: center;">
+        <div style="display: flex; flex-direction: column;">
+
+                <form method="post" asp-controller="Home" asp-action="OnRegister">
+                    <h1>Register</h1>
+                    <div class="avatar">
+                        <img id="avatar-preview" src="/Pictures/Login-Register/1-cat.jpg" />
+                        <div class="avatar-buttons">
+                            <input type="radio" name="regAvatarInput" id="avatar-1" value="1" onchange="changeAvatar()" checked/>
+                            <label for="avatar-1">
+                                <img src="/Pictures/Login-Register/1-cat.jpg" />
+                            </label>
+                            <input type="radio" name="regAvatarInput" id="avatar-2" value="2" onchange="changeAvatar()" />
+                            <label for="avatar-2">
+                                <img src="/Pictures/Login-Register/2-sheep.jpg" />
+                            </label>
+                            <input type="radio" name="regAvatarInput" id="avatar-3" value="3" onchange="changeAvatar()" />
+                            <label for="avatar-3">
+                                <img src="/Pictures/Login-Register/3-chick.jpg" />
+                            </label>
+                            <input type="radio" name="regAvatarInput" id="avatar-4" value="4" onchange="changeAvatar()" />
+                            <label for="avatar-4">
+                                <img src="/Pictures/Login-Register/4-fox.jpg" />
+                            </label>
+                        </div>
+                    </div>
+                    Username <br />
+                    <input name="regUsernameInput" type="text" />
+                    <br />
+                    Email <br />
+                    <input name="regEmailInput" type="email" />
+                    <br />
+                    Password <br />
+                    <input name="regPasswordInput" type="password" />
+                    <br />
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
 </div>
+
+<script>
+    function changeAvatar() {
+        document.getElementById("avatar-preview").src = document.querySelector(".avatar-buttons > input:checked + label > img").src;
+    }
+</script>
