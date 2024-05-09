@@ -15,17 +15,22 @@
 
 
             <form method="post" asp-controller="Home" asp-action="OnLogin">
-                <h1>Login</h1>
-                Username <br />
-                <input name="usernameInput" type="text" />
+                    <h1 style="color:black;">Login</h1>
+                    <br />
+                    <p style="color:#104EB8;">Don't have an account? <a style="color: #51C64B;" href="Register"> Register now!</a></p>
+    
+                    <input name="usernameInput" type="text" placeholder="Enter username" class="cornerInput"/>
                 <br />
-                Password <br />
-                <input name="passwordInput" type="password" />
+                    <br />
+                    <input name="passwordInput" type="password" placeholder="Enter password" class="cornerInput" />
                 <br />
-                <button type="submit">Login</button>
+                    <br />
+                <button type="submit" class="login-bt">Login</button>
+                    <br />
+                    <br />
 
             </form>
-            <a href="Register">link text</a>
+           
 
 
 

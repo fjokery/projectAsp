@@ -1,9 +1,12 @@
+.mainBackground {
+    padding-top: 6rem;
+}
+
 .login-reg-box {
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 50%;
-    min-height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,4 +43,27 @@
 #avatar-preview {
     height: 8rem;
     width: 8rem;
+}
+
+
+.cornerInput {
+    border-radius: 7px;
+    border-style: none;
+    width: 300px;
+    height: 40px;
+    background-color: #B8DDFF;
+}
+
+.cornerInput::placeholder {
+    color: white;
+}
+
+.login-bt {
+    border-radius: 7px;
+    border-style: none;
+    width: 200px;
+    height: 40px;
+    background-color: #51C64B;
+    color: white;
+    ;
 }
