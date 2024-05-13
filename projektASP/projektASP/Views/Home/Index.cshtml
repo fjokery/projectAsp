@@ -12,8 +12,30 @@
 
         <h1 class="display-4 text-white" style="font-family: 'Comic Sans MS';">Minecraft Soundtrack </h1>
         <div class="green-box-front-text">
-            <h3 class="text-white" style="font-family: 'Comic Sans MS';">something something something  </h3>
+        <h3 class="text-white" style="font-family: 'Comic Sans MS';">something something something  </h3>
         </div>
+        <img style="width: 80px; height: 80px;" src="/Pictures/Index/disc.gif" />
+
+</div>
+
+<div class="infoBackground">
+    <h1 class="display-4">Welcome @SQlite.GetUsername(Context)</h1>
+    Todays date
+    <br>
+    @{
+        /*Datumräknare*/
+    }
+    @DateTime.Now.ToString("yyyy-MM-dd  HH:mm")
+    <br>
+    Visitors
+    <br />
+
+    @{
+        /*Besöksräknare*/
+    }
+    Total visits: @SQlite.countTotalVisitors()
+    <br>
+    Total individual Visits: @SQlite.countIndividualVisitors()
 
 </div>
 
@@ -24,13 +46,9 @@
 
 
 <div class="text-center">
-    <h1 class="display-4">@SQlite.GetUsername(Context)</h1>
     <p>
         Detta är vår hemsida<br> 
         
-        @{/*Datumräknare*/}
-        @DateTime.Now.ToString("yyyy-MM-dd  HH:mm")
-        <br>
 
         @{/*Besöksräknare*/}
         Antal totala besök: @SQlite.countTotalVisitors()
