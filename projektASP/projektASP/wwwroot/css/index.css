@@ -28,3 +28,19 @@ body{
     align-items: center;
     text-align: center;
 }
+
+.music-weather-box-container {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10%;
+    width: 100%;
+    text-align: center;
+}
+.music-weather-box-information {
+    display: flex;
+    flex-direction: column;
+    background-color: green;
+
+    align-items: center;
+    text-align: center;
+}
