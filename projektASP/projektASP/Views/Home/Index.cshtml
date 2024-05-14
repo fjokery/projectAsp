@@ -41,13 +41,15 @@
             @{
                 /*music disc code goes here*/
             }
-            Todays music disc
+            Todays music disc <br />
+            
 
             <img style="width: 80px; height: 80px;" src="/Pictures/Index/disc.gif" />
             @{
                 /*code for what music disc it is*/
             }
-            "cat"
+            @SQlite.GetDailyMusic()
+
         </div>
         <div class="music-weather-box-information">
 

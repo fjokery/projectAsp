@@ -303,5 +303,13 @@ namespace projektASP.Models
 			return (string)cmd.ExecuteScalar();
 		}
 
+        public static string GetDailyMusic()
+        {
+            String[] discs = {"Cat", "Mall", "Mellohi", "Stal", "Strad", "Wait", "Chirp", "Pigstep", "Otherside", "Relic"};
+            string dayString = @DateTime.Now.ToString("dd");
+            char dayChar = dayString[1];
+            int dayInt = Int32.Parse(dayChar.ToString());
+            return discs[dayInt];
+        }
 	}
 }
