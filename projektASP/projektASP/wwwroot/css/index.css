@@ -10,8 +10,10 @@ body{
 }
 
 .green-box-front-text {
-    background-color: rgba(16, 78, 184, 0.3); /* Opacity for the background yeag */
+    background-color: rgba(16, 78, 184, 0.6); /* Opacity for the background yeag */
     border-radius: 25px;
+    padding-left: 0.8%;
+    padding-right: 0.8%;
 }
 
     .green-box-front-text h3 {
@@ -39,8 +41,6 @@ body{
 .music-weather-box-information {
     display: flex;
     flex-direction: column;
-    background-color: green;
-
     align-items: center;
     text-align: center;
 }
