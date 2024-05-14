@@ -25,17 +25,21 @@
     @{
         /*Datumräknare*/
     }
-    @DateTime.Now.ToString("yyyy-MM-dd  HH:mm")
-    <br>
-    Visitors
+    <h1 style="color: #51C64B;">@DateTime.Now.ToString("yyyy-MM-dd")</h1>
+    Total visits
     <br />
 
     @{
         /*Besöksräknare*/
     }
-    Total visits: @SQlite.countTotalVisitors()
-    <br>
-    Total individual Visits: @SQlite.countIndividualVisitors()
+    <h1 style="color: #51C64B;">  @SQlite.countTotalVisitors()</h1>
+    Total individual Visits
+    <h1 style="color: #51C64B;">@SQlite.countIndividualVisitors()</h1>
+
+    <div class="music-weather-box-container">
+
+
+    </div>
 
 </div>
 
