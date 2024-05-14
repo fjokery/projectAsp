@@ -4,6 +4,11 @@
     margin: 0;
 }
 
+
+body{
+    font-family: Sugar;
+}
+
 .green-box-front-text {
     background-color: rgba(16, 78, 184, 0.3); /* Opacity for the background yeag */
     border-radius: 25px;
