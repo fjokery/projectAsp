@@ -1,29 +1,35 @@
 <link rel="stylesheet" href="~/css/forum.css" />
 
-
+<div class="main-container">
 @if (SQlite.GetUsername(Context) != null)
-{
-	<p>HEJ @SQlite.GetUsername(Context)</p>
-
+{	
+	
 	<form method="post" asp-controller="Home" asp-action="CreatePost">
-		<label for="fname">@SQlite.GetUsername(Context)</label><br>
-		<br />
-		<p>Titel</p>
-		<input type="text" name="title" size="40" maxlength="100"/><br />
-		<br />
-		<p>Text</p>
-		<input type="text" name="text" size="80" maxlength="400" style="height: 30px;"><br>
-		<br />
-		<input type="submit" value="Submit">
+		<div class="create-post-box">
+			<label for="fname">Skapa ett inlägg som <b>@SQlite.GetUsername(Context)</b></label><br>
+			<br>
+			<p><b>Titel</b></p>
+			<input type="text" name="title" size="40" maxlength="100"/><br>
+			<br>
+			<p><b>Text</b></p>
+			<input type="text" name="text" size="80" maxlength="400" style="height: 30px;"><br>
+			<br>
+			<input type="submit" value="Submit" style="color: white; border-radius: 10px; background-color: green;">
+		</div>
 	</form>
-	<br />
-	<p>--------------------------------------------------</p>
-
+	
 
 } else
 {
-	<p>Oobs! måste logga in för att posta i forumet!</p>
+		<p><b>Oobs! måste logga in för att posta i forumet!</b></p>
 }
+
+<!-- Mae will watch isak make a searchbar here -->
+
+	<div class="searchbar">
+
+
+	</div>
 
 <!--final posts goes here-->
 
@@ -31,8 +37,6 @@
 	for (int i = (int)SQlite.GetTotalPostAmount(); i >= 0; i--)
 	{
 		if (SQlite.GetPostText(i) == null || SQlite.GetPostText(i) == ""){ continue; }
-
-		<div class="main-container">
 			<div class="post-box">
 				<div class="user-container">
 					<img src=@SQlite.GetPFP(i) width="7%" style="border-radius: 20px;">
@@ -43,6 +47,6 @@
 			<br>
 			<p style="color: gray">@SQlite.GetPostTime(i)</p>
 			</div>
-		</div>
 	}
 }
+</div>
