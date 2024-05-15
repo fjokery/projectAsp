@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
+using System;
 
 namespace projektASP.Models
 {
@@ -58,7 +59,7 @@ namespace projektASP.Models
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "DELETE FROM Users";
+            cmd.CommandText = "DELETE FROM Forum";
             cmd.ExecuteNonQuery();
 		}
 
@@ -311,5 +312,17 @@ namespace projektASP.Models
             int dayInt = Int32.Parse(dayChar.ToString());
             return discs[dayInt];
         }
+
+        public static string GetPFP(int index)
+        {
+            SqliteConnection conn = CreateConnection();
+            SqliteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "SELECT Avatar FROM Users WHERE Username = @Username";
+            cmd.Parameters.AddWithValue("@Username", GetPostUser(index));
+            long avatarIndex = (long)cmd.ExecuteScalar();
+            return $"/Pictures/Login-Register/{avatarIndex}.jpg";
+        }
+
 	}
 }
