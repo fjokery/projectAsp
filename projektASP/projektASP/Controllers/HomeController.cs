@@ -137,6 +137,13 @@ namespace projektASP.Controllers
 			}
 		}
 
+        public void SearchPost()
+        {
+            if (Request.Method == "POST")
+            {
+
+            }
+		}
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

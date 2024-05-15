@@ -26,10 +26,13 @@
 
 <!-- Mae will watch isak make a searchbar here -->
 
+<form method="post" asp-controller="Home" asp-action="SearchPost">
 	<div class="searchbar">
-
-
+		<p><b>Sök</b></p>
+		<input type="text" name="search" size="80" />
+		<input type="submit" value="Sök" style="color: white; border-radius: 10px; background-color: green;">
 	</div>
+</form>
 
 <!--final posts goes here-->
 
