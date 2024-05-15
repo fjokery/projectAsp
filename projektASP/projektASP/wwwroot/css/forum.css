@@ -1,0 +1,22 @@
+.main-container {
+    display: flex;
+
+    justify-content: center;
+}
+
+.post-box {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    margin: 20px;
+    padding: 10px;
+    color: midnightblue;
+}
+
+.user-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1%;
+}

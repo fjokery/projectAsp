@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="~/css/forum.css" />
+
+
 @if (SQlite.GetUsername(Context) != null)
 {
 	<p>HEJ @SQlite.GetUsername(Context)</p>
@@ -29,15 +32,17 @@
 	{
 		if (SQlite.GetPostText(i) == null || SQlite.GetPostText(i) == ""){ continue; }
 
-		<h3>@SQlite.GetPostUser(i)</h3>
-		<br />
-		<p>@SQlite.GetPostTime(i)</p>
-		<br />
-		<h2>@SQlite.GetPostTitle(i)</h2>
-		<br />
-		<p>@SQlite.GetPostText(i)</p>
-		<br />
-		<p>--------------------------------------------------</p>
-		<br />
+		<div class="main-container">
+			<div class="post-box">
+				<div class="user-container">
+					<img src="/Pictures/Login-Register/1-cat.jpg" width="7%" style="border-radius: 20px;">
+					<h3>@SQlite.GetPostUser(i)</h3>
+				</div>
+				<p><h2>@SQlite.GetPostTitle(i)</h2></p>
+			<p>@SQlite.GetPostText(i)</p>
+			<br>
+			<p style="color: gray">@SQlite.GetPostTime(i)</p>
+			</div>
+		</div>
 	}
 }
