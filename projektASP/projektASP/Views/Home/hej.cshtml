@@ -28,7 +28,7 @@
 <!--final posts goes here-->
 
 @{
-	for (int i = (int)SQlite.GetTotalPostAmount(); i > 0; i--)
+	for (int i = (int)SQlite.GetTotalPostAmount(); i >= 0; i--)
 	{
 		if (SQlite.GetPostText(i) == null || SQlite.GetPostText(i) == ""){ continue; }
 
