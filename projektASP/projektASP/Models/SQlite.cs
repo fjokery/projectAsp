@@ -339,5 +339,59 @@ namespace projektASP.Models
 			long avatarIndex = (long)cmd.ExecuteScalar();
 			return $"/Pictures/Login-Register/{avatarIndex}.jpg";
 		}
+
+        public static bool PostSearch(string searchWord, int index)
+        {
+			SqliteConnection conn = CreateConnection();
+			SqliteCommand cmd = conn.CreateCommand();
+
+            searchWord = $"%{searchWord}%";
+
+			cmd.CommandText = "SELECT COUNT(*) FROM Forum WHERE Title LIKE @Search AND Postindex = @Postindex";
+			cmd.Parameters.AddWithValue("@Search", searchWord);
+			cmd.Parameters.AddWithValue("@Postindex", index);
+
+            
+            if ((long)cmd.ExecuteScalar() > 0)
+            {
+                Console.WriteLine(index);
+                return true;
+            }
+
+			SqliteCommand cmd2 = conn.CreateCommand();
+			cmd2.CommandText = "SELECT COUNT(*) FROM Forum WHERE User LIKE @Search AND Postindex = @Postindex";
+			cmd2.Parameters.AddWithValue("@Search", searchWord);
+			cmd2.Parameters.AddWithValue("@Postindex", index);
+
+			if ((long)cmd2.ExecuteScalar() > 0)
+			{
+				Console.WriteLine(index);
+
+				return true;
+			}
+
+			SqliteCommand cmd3 = conn.CreateCommand();
+			cmd3.CommandText = "SELECT COUNT(*) FROM Forum WHERE Posttext LIKE @Search AND Postindex = @Postindex";
+			cmd3.Parameters.AddWithValue("@Search", searchWord);
+			cmd3.Parameters.AddWithValue("@Postindex", index);
+
+            Console.WriteLine(searchWord);
+
+            if ((long)cmd3.ExecuteScalar() > 0)
+			{
+				Console.WriteLine(index);
+
+				return true;
+			}
+
+            return false;
+
+		}
+
+        public static string GetSearchCookie(HttpContext httpContext)
+        {
+			return httpContext.Request.Cookies["Search"];
+		}
+
 	}
 }

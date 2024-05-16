@@ -55,7 +55,13 @@ namespace projektASP.Controllers
 			return View();
 		}
 
-        //Resettar anv�ndarnamnscookien vilket loggar ut en
+		public IActionResult Search()
+		{
+
+			return View();
+		}
+
+		//Resettar anv�ndarnamnscookien vilket loggar ut en
 		public void Logout()
         {
             Response.Cookies.Append("Username", "");
@@ -145,12 +151,9 @@ namespace projektASP.Controllers
         {
             if (Request.Method == "POST")
             {
-                string title = Request.Form["search"];
-                
-                //Response.Clear();
-                //Response.WriteAsync(title.ToString());
-                RedirectToAction("Index", title);
-
+                string search = Request.Form["search"];
+                Response.Cookies.Append("Search", search);
+                Response.Redirect("Search");
             }
         }
 
