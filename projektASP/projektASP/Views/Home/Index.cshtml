@@ -42,10 +42,13 @@
                 /*music disc code goes here*/
             }
             Todays music disc <br />
-            
 
-            <img style="width: 80px; height: 80px;" src="/Pictures/Index/disc.gif" />
+
+
             @{
+                string discimg = $"/Pictures/Discs/{SQlite.GetDailyMusic()}.webp";
+                Console.WriteLine(discimg);
+                <img style="width: 20%;" src=@discimg/>
                 /*code for what music disc it is*/
             }
             @SQlite.GetDailyMusic()
@@ -57,7 +60,7 @@
             }
             Todays weather
 
-            <img style="width: 80px; height: 80px;" src="/Pictures/Index/disc.gif" />
+            <img style="width: 20%;" src="/Pictures/Index/disc.gif" />
  
         </div>
 
