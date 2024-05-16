@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
 using System;
+using System.Reflection;
 
 namespace projektASP.Models
 {
@@ -313,16 +314,25 @@ namespace projektASP.Models
             return discs[dayInt];
         }
 
-        public static string GetPFP(int index)
-        {
-            SqliteConnection conn = CreateConnection();
-            SqliteCommand cmd = conn.CreateCommand();
+        //Skicka in null för denna användare, index för en posts användare
+		public static string GetPFP(HttpContext httpContext, int index)
+		{
+			SqliteConnection conn = CreateConnection();
+			SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "SELECT Avatar FROM Users WHERE Username = @Username";
-            cmd.Parameters.AddWithValue("@Username", GetPostUser(index));
-            long avatarIndex = (long)cmd.ExecuteScalar();
-            return $"/Pictures/Login-Register/{avatarIndex}.jpg";
-        }
+			cmd.CommandText = "SELECT Avatar FROM Users WHERE Username = @Username";
 
+            if (index == null)
+            {
+				cmd.Parameters.AddWithValue("@Username", GetUsername(httpContext));
+            }
+            else
+            {
+				cmd.Parameters.AddWithValue("@Username", GetPostUser(index));
+			}
+			
+			long avatarIndex = (long)cmd.ExecuteScalar();
+			return $"/Pictures/Login-Register/{avatarIndex}.jpg";
+		}
 	}
 }
