@@ -44,3 +44,26 @@ body{
     align-items: center;
     text-align: center;
 }
+.blue-info-container-1 {
+    background-size: cover;
+    background-position: center;
+    background-color: #B8DDFF;
+    width: 100%;
+    height: 110vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.white-video-container {
+    background-size: cover;
+    background-position: center;
+    background-color: white;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}

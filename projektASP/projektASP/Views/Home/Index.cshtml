@@ -65,52 +65,82 @@
 
 </div>
 
+<img style="background-color: white;" src="/Pictures/Index/divider.svg" />
+
+<div class="blue-info-container-1">
+
+    @{
+        /*Bildspelstext*/
+    }
+    <h2 class="display-4 text-black">Album</h2>
+    <br />
+    @{
+        /*Bildspel*/
+    }
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <partial name="_Slideshow.cshtml" />
+    </div>
 
 
 
+
+</div>
+<img style="background-color: white;" src="/Pictures/Index/divider-up.svg" />
+
+
+<div class="white-video-container">
+
+    @{
+        /*Bildspelstext*/
+    }
+    <h2 class="display-4 text-black">Newest disc!</h2>
+    <br />
+    <iframe width="800" height="350" src="https://www.youtube.com/embed/dEgjOyBwIaE?si=SIeCiHgV_7iROW-m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+</div>
+
+<img style="background-color: white;" src="/Pictures/Index/divider.svg" />
+
+<!--
 
 <div class="text-center">
-    <p>
-        Detta är vår hemsida<br> 
-        
 
-        @{/*Besöksräknare*/}
-        Antal totala besök: @SQlite.countTotalVisitors()
-        <br>
-        Antal individuella besökare: @SQlite.countIndividualVisitors()
-
-    </p>
-
-
-    @{/*Vädertiteltext*/}
+@{
+            /*Vädertiteltext*/
+}
     <h2 class="display-4">Weather</h2>
 
-    @{/*VäderAPI (snodd från internet)*/}
+@{
+            /*VäderAPI (snodd från internet)*/
+}
     <a class="weatherwidget-io" href="https://forecast7.com/en/55d3813d16/trelleborg/" data-label_1="TRELLEBORG" data-label_2="WEATHER" data-theme="original">TRELLEBORG WEATHER</a>
     <script>
         !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
-    </script> 
+    </script>
     <br>
 
-    
-    @{/*Radiotext*/}
+
+@{
+            /*Radiotext*/
+}
     <h2 class="display-4">Radio Trelleborg 😊</h2>
 
-    @{/*Skapar en audioplayer som strömmar från Radio Trelleborgs sida*/}
+@{
+    /*Skapar en audioplayer som strömmar från Radio Trelleborgs sida*/
+}
     <audio controls>
         <source src="https://stream.nsp.se/RaTbg_MP3_Lo" />
     </audio>
     <br><br>
 
 
-    @{/*Bildspelstext*/}
-    <h2 class="display-4">Bildspel</h2>
-
-    @{/*Bildspel*/}
-    <div style="width: 100%; display: flex; justify-content: center;">
-        <partial name="_Slideshow.cshtml" />
-    </div>
 
 
-    
+
 </div>
+
+
+
+
+-->
