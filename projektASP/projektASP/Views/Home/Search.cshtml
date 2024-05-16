@@ -6,13 +6,20 @@
 
 <div class="main-container">
 
+	<form method="post" asp-controller="Home" asp-action="SearchPost">
+		<div class="searchbar">
+			<p><b>Sök</b></p>
+			<input type="text" name="search" size="80" />
+			<input type="submit" value="Sök" style="color: white; border-radius: 10px; background-color: green;">
+		</div>
+	</form>
 
 @{
 	string search = SQlite.GetSearchCookie(Context);
-
+	<h1>Sökresultat för <b>@search</b></h1>
 	for (int i = (int)SQlite.GetTotalPostAmount(); i >= 0; i--)
 	{
-
+		
 		if (SQlite.GetPostText(i) == null || SQlite.GetPostText(i) == "") { continue; }
 
 		if(SQlite.PostSearch(search, i))
