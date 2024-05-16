@@ -103,7 +103,9 @@ namespace projektASP.Controllers
 
                 if (isAuthenticated)
                 {
+                    SQlite.Login(username, password);
                     Response.Redirect("Index");
+                    
                 }
                 else
                 {
