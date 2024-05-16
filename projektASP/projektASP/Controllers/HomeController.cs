@@ -116,6 +116,7 @@ namespace projektASP.Controllers
             }
         }
 
+        //Skapa post
         public void CreatePost()
         {
 			if (Request.Method == "POST")
@@ -139,13 +140,19 @@ namespace projektASP.Controllers
 			}
 		}
 
+        //Söka på forumet
         public void SearchPost()
         {
             if (Request.Method == "POST")
             {
+                string title = Request.Form["search"];
+                
+                //Response.Clear();
+                //Response.WriteAsync(title.ToString());
+                RedirectToAction("Index", title);
 
             }
-		}
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

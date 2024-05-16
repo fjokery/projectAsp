@@ -46,9 +46,12 @@
 
 
             @{
+                <audio id="audio_play">
+                    <source src="/Audios/Music Discs/Chirp.ogg" type="audio/ogg" />
+                </audio>
+
                 string discimg = $"/Pictures/Discs/{SQlite.GetDailyMusic()}.webp";
-                Console.WriteLine(discimg);
-                <img style="width: 20%;" src=@discimg/>
+                <img style="width: 20%;" src="@discimg" onClick="document.getElementById('audio_play').play(); return false;" />
                 /*code for what music disc it is*/
             }
             @SQlite.GetDailyMusic()

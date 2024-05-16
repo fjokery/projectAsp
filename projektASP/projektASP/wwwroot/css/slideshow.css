@@ -6,14 +6,16 @@
 .containerSS {
     position: relative;
     width: 50%;
-    border: 2px solid #51C64B; /* Green border */
-    border-radius: 10px; /* Rounded corners */
 }
 
 /* Hide the images by default */
 .mySlides {
     display: none;
 }
+    .mySlides img {
+        border: 10px solid #51C64B; /* Green border */
+        border-radius: 10px 10px 0 0;
+    }
 
 /* Add a pointer when hovering over the thumbnail images */
 .cursor {
