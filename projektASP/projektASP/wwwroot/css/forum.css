@@ -45,3 +45,8 @@ body {
     width: 100%;
     padding: 10px;
 }
+
+.fictional-footer-container {
+    display: flex;
+    justify-content: space-between;
+}
