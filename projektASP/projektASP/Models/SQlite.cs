@@ -314,7 +314,7 @@ namespace projektASP.Models
             return discs[dayInt];
         }
 
-        //Skicka in null för denna användare, index för en posts användare
+        //Skicka in -1 för denna användare, index för en posts användare
 		public static string GetPFP(HttpContext httpContext, int index)
 		{
 			SqliteConnection conn = CreateConnection();
@@ -322,9 +322,15 @@ namespace projektASP.Models
 
 			cmd.CommandText = "SELECT Avatar FROM Users WHERE Username = @Username";
 
-            if (index == null)
+            if (index == -1)
             {
-				cmd.Parameters.AddWithValue("@Username", GetUsername(httpContext));
+                string name = GetUsername(httpContext);
+                if (name != null)
+                {
+                    cmd.Parameters.AddWithValue("@Username", name);
+                }
+                else { return ""; }
+				
             }
             else
             {
