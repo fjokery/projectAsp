@@ -185,7 +185,6 @@ namespace projektASP.Models
 
             if (rowsAffected > 0)
             {
-                Login(username, hashedPassword);
                 return true;
             }
             else
