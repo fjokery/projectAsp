@@ -350,7 +350,7 @@ namespace projektASP.Models
 			cmd.Parameters.AddWithValue("@Search", searchWord);
 			cmd.Parameters.AddWithValue("@Postindex", index);
 
-            string[] categories = new string[3] { "Title", "User", "Posttext"};
+            string[] categories = ["Title", "User", "Posttext"];
             
             foreach(string category in categories)
             {
