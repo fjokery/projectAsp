@@ -347,45 +347,22 @@ namespace projektASP.Models
 
             searchWord = $"%{searchWord}%";
 
-			cmd.CommandText = "SELECT COUNT(*) FROM Forum WHERE Title LIKE @Search AND Postindex = @Postindex";
 			cmd.Parameters.AddWithValue("@Search", searchWord);
 			cmd.Parameters.AddWithValue("@Postindex", index);
 
+            string[] categories = new string[3] { "Title", "User", "Posttext"};
             
-            if ((long)cmd.ExecuteScalar() > 0)
+            foreach(string category in categories)
             {
-                Console.WriteLine(index);
-                return true;
-            }
-
-			SqliteCommand cmd2 = conn.CreateCommand();
-			cmd2.CommandText = "SELECT COUNT(*) FROM Forum WHERE User LIKE @Search AND Postindex = @Postindex";
-			cmd2.Parameters.AddWithValue("@Search", searchWord);
-			cmd2.Parameters.AddWithValue("@Postindex", index);
-
-			if ((long)cmd2.ExecuteScalar() > 0)
-			{
-				Console.WriteLine(index);
-
-				return true;
+				cmd.CommandText = $"SELECT COUNT(*) FROM Forum WHERE {category} LIKE @Search AND Postindex = @Postindex";
+				
+                if ((long)cmd.ExecuteScalar() > 0)
+				{
+					Console.WriteLine(index);
+					return true;
+				}
 			}
-
-			SqliteCommand cmd3 = conn.CreateCommand();
-			cmd3.CommandText = "SELECT COUNT(*) FROM Forum WHERE Posttext LIKE @Search AND Postindex = @Postindex";
-			cmd3.Parameters.AddWithValue("@Search", searchWord);
-			cmd3.Parameters.AddWithValue("@Postindex", index);
-
-            Console.WriteLine(searchWord);
-
-            if ((long)cmd3.ExecuteScalar() > 0)
-			{
-				Console.WriteLine(index);
-
-				return true;
-			}
-
             return false;
-
 		}
 
         public static string GetSearchCookie(HttpContext httpContext)
