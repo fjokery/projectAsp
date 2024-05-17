@@ -22,25 +22,21 @@
     <h1 class="display-4">Welcome @SQlite.GetUsername(Context)</h1>
     Todays date
     <br>
-    @{
-        /*Datumräknare*/
-    }
+    @*Datumräknare*@
     <h1 style="color: #51C64B;">@DateTime.Now.ToString("yyyy-MM-dd")</h1>
     Total visits
     <br />
 
-    @{
-        /*Besöksräknare*/
-    }
+    @*Besöksräknare*@
     <h1 style="color: #51C64B;">  @SQlite.countTotalVisitors()</h1>
     Total individual Visits
     <h1 style="color: #51C64B;">@SQlite.countIndividualVisitors()</h1>
 
     <div class="music-weather-box-container">
+
         <div class="music-weather-box-information">
-            @{
-                /*music disc code goes here*/
-            }
+
+            @*music disc code goes here*@
             Todays music disc <br />
 
             @{
@@ -53,62 +49,52 @@
                     <source src="@discAudio" type="audio/ogg" />
                 </audio>
             }
-            
         </div>
+
         <div class="music-weather-box-information">
-            @{
-                /*weather code goes here*/
-            }
+            @*weather code goes here*@
             Todays weather
-
-
             <a class="weatherwidget-io" href="https://forecast7.com/en/55d3813d16/trelleborg/" data-label_1="TRELLEBORG" data-label_2="WEATHER" data-font="Roboto" data-mode="Current" data-days="3" data-textcolor="Darkblue" data-suncolor="yellow" data-mooncolor="lightgrey" data-cloudcolor="lightgrey" data-cloudfill="white" data-raincolor="lightblue" data-snowcolor="lightgrey">TRELLEBORG WEATHER</a>
             <script>
                 !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
             </script>
- 
         </div>
 
     </div>
-
 </div>
 
 <img style="background-color: white;" src="/Pictures/Index/divider.svg" />
 
-<div class="blue-info-container-1">
+<div class="info-container">
 
-    @{
-        /*Bildspelstext*/
-    }
+    @*Bildspelstext*@
     <h2 class="display-4 text-black">Album</h2>
     <br />
-    @{
-        /*Bildspel*/
-    }
+
+    @*Bildspel*@
     <div style="width: 100%; display: flex; justify-content: center;">
         <partial name="_Slideshow.cshtml" />
     </div>
-
-
-
-
 </div>
 <img style="background-color: white;" src="/Pictures/Index/divider-up.svg" />
 
 
-<div class="white-video-container">
+<div class="info-container" style="background-color: white">
 
-    @{
-        /*Bildspelstext*/
-    }
-    <h2 class="display-4 text-black">Newest disc!</h2>
-    <br />
-    <iframe width="800" height="350" src="https://www.youtube.com/embed/dEgjOyBwIaE?si=SIeCiHgV_7iROW-m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+    Poll goes here (Trust)
 
 </div>
 
 <img style="background-color: white;" src="/Pictures/Index/divider.svg" />
+
+<div class="info-container">
+
+    @*Video*@
+    <h2 class="display-4 text-black">Newest disc!</h2>
+    <br />
+    <iframe width="800" height="350" src="https://www.youtube.com/embed/dEgjOyBwIaE?si=SIeCiHgV_7iROW-m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+</div>
 
 <!--
 
