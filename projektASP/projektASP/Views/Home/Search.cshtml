@@ -16,29 +16,38 @@
 
 @{
 	string search = SQlite.GetSearchCookie(Context);
-	<h1>Sökresultat för <b>@search</b></h1>
-	for (int i = (int)SQlite.GetTotalPostAmount(); i >= 0; i--)
-	{
-		
-		if (SQlite.GetPostText(i) == null || SQlite.GetPostText(i) == "") { continue; }
+		<h1>Sökresultat för <b>@search</b></h1>
 
-		if(SQlite.PostSearch(search, i))
+		string[] forums = new string[2] { "Forum", "ForumFree"};
+		foreach(string forum in forums)
 		{
-			<div class="post-box">
-				<div class="user-container">
-					<img src=@SQlite.GetPFP(Context, i) width="7%" style="border-radius: 20px;">
-					<h3>@SQlite.GetPostUser(i)</h3>
-				</div>
-				<p><h2>@SQlite.GetPostTitle(i)</h2></p>
-				<p>@SQlite.GetPostText(i)</p>
-				<br>
-				<div class="fictional-footer-container">
-					@SQlite.GetPostTime(i)
-					<button type="button">Click Me!</button>
-				</div>
-			</div>
+			for (int i = (int)SQlite.GetTotalPostAmount(forum); i >= 0; i--)
+			{
+
+				if (SQlite.GetPostText(forum, i) == null || SQlite.GetPostText(forum, i) == "") { continue; }
+
+				if (SQlite.PostSearch(forum, search, i))
+				{
+					<div class="post-box">
+						<div class="user-container">
+							<img src=@SQlite.GetPFP(Context, forum, i) width="7%" style="border-radius: 20px;">
+							<h3>@SQlite.GetPostUser(forum, i)</h3>
+						</div>
+						<p><h2>@SQlite.GetPostTitle(forum, i)</h2></p>
+						<p>@SQlite.GetPostText(forum, i)</p>
+						<br>
+						<div class="fictional-footer-container">
+							@SQlite.GetPostTime(forum, i)
+							<button type="button">Click Me!</button>
+						</div>
+					</div>
+				}
+			}
+
+			<p>----------------------------------------</p>
 		}
-	}
+
+	
 }
 
 </div>

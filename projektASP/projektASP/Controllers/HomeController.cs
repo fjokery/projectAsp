@@ -130,12 +130,22 @@ namespace projektASP.Controllers
                 //Tar titel och text fr�n textrutor
 				string title = Request.Form["title"];
 				string text = Request.Form["text"];
+                string forum = Request.Form["forum"];
+                string name;
+                try { name = Request.Form["name"]; } catch (InvalidOperationException) { name = Request.Cookies["Username"]; }
 
-				bool posted = SQlite.CreatePost(title, text, Request.Cookies["Username"]);
+				bool posted = SQlite.CreatePost(forum, title, text, name);
 
 				if (posted)
 				{
-					Response.Redirect("Hej");
+                    if (forum == "Forum")
+                    {
+						Response.Redirect("Hej");
+                    }
+                    else
+                    {
+						Response.Redirect("Privacy");
+					}
 				}
 				else
 				{

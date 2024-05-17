@@ -15,6 +15,7 @@
 			<input type="text" name="text" size="80" maxlength="400" style="height: 30px;"><br>
 			<br>
 			<input type="submit" value="Submit" style="color: white; border-radius: 10px; background-color: green;">
+			<input name="forum" style="display: none" value="Forum">
 		</div>
 	</form>
 	
@@ -37,19 +38,19 @@
 <!--final posts goes here-->
 
 @{
-	for (int i = (int)SQlite.GetTotalPostAmount(); i >= 0; i--)
+	for (int i = (int)SQlite.GetTotalPostAmount("Forum"); i >= 0; i--)
 	{
-		if (SQlite.GetPostText(i) == null || SQlite.GetPostText(i) == ""){ continue; }
+		if (SQlite.GetPostText("Forum", i) == null || SQlite.GetPostText("Forum", i) == "") { continue; }
 			<div class="post-box">
 				<div class="user-container">
-					<img src=@SQlite.GetPFP(Context, i) width="7%" style="border-radius: 20px;">
-					<h3>@SQlite.GetPostUser(i)</h3>
+					<img src=@SQlite.GetPFP(Context, "Forum", i) width="7%" style="border-radius: 20px;">
+					<h3>@SQlite.GetPostUser("Forum", i)</h3>
 				</div>
-				<p><h2>@SQlite.GetPostTitle(i)</h2></p>
-			<p>@SQlite.GetPostText(i)</p>
+				<p><h2>@SQlite.GetPostTitle("Forum", i)</h2></p>
+				<p>@SQlite.GetPostText("Forum", i)</p>
 			<br>
 			<div class="fictional-footer-container">
-				@SQlite.GetPostTime(i)
+					@SQlite.GetPostTime("Forum", i)
 				<button type="button">Click Me!</button>
 			</div>
 			</div>

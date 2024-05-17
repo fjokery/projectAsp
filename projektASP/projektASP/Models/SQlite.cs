@@ -37,7 +37,7 @@ namespace projektASP.Models
         public static void CreateTable(SqliteConnection conn)
         {
             SqliteCommand cmd;
-            string Createsql = "CREATE TABLE Forum(Postindex INTEGER, Time DATETIME, User TEXT, Title TEXT, Posttext TEXT)";
+            string Createsql = "CREATE TABLE ForumFree(Postindex INTEGER, Time DATETIME, User TEXT, Title TEXT, Posttext TEXT)";
             cmd = conn.CreateCommand();
             cmd.CommandText = Createsql;
             cmd.ExecuteNonQuery();
@@ -221,25 +221,25 @@ namespace projektASP.Models
         }
 
         //Returnerar antalet foruminlägg
-        public static long GetTotalPostAmount()
+        public static long GetTotalPostAmount(string forum)
         {
             SqliteConnection conn = CreateConnection();
 			SqliteCommand getIndexCmd = conn.CreateCommand();
 
-            getIndexCmd.CommandText = "SELECT COUNT(*) FROM Forum";
+            getIndexCmd.CommandText = $"SELECT COUNT(*) FROM {forum}";
             return (long)getIndexCmd.ExecuteScalar();
 
         }
 
         //Skapar ett foruminlägg
-        public static bool CreatePost(string title, string text, string username)
+        public static bool CreatePost(string forum, string title, string text, string username)
         {
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 			
 
-			cmd.CommandText = "INSERT INTO Forum (Postindex, Time, User, Title, Posttext) VALUES (@Postindex, @Time, @User, @Title, @Posttext)";
-            cmd.Parameters.AddWithValue("@Postindex", GetTotalPostAmount());
+			cmd.CommandText = $"INSERT INTO {forum} (Postindex, Time, User, Title, Posttext) VALUES (@Postindex, @Time, @User, @Title, @Posttext)";
+            cmd.Parameters.AddWithValue("@Postindex", GetTotalPostAmount(forum));
             cmd.Parameters.AddWithValue("@Time", DateTime.Now);
 			cmd.Parameters.AddWithValue("@User", username);
 			cmd.Parameters.AddWithValue("@Title", title);
@@ -251,12 +251,12 @@ namespace projektASP.Models
         }
         
         //Returnerar ett inläggs tid
-        public static string GetPostTime(int index)
+        public static string GetPostTime(string forum, int index)
         {
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "SELECT datetime(Time) FROM Forum WHERE Postindex = @Postindex";
+            cmd.CommandText = $"SELECT datetime(Time) FROM {forum} WHERE Postindex = @Postindex";
 			cmd.Parameters.AddWithValue("@Postindex", index);
 
             if(cmd.ExecuteScalar() != null)
@@ -272,34 +272,34 @@ namespace projektASP.Models
 		}
 
 		//Returnerar ett inläggs användarnamn
-		public static string GetPostUser(int index)
+		public static string GetPostUser(string forum, int index)
 		{
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 
-			cmd.CommandText = "SELECT User FROM Forum WHERE Postindex = @Postindex";
+			cmd.CommandText = $"SELECT User FROM {forum} WHERE Postindex = @Postindex";
 			cmd.Parameters.AddWithValue("@Postindex", index);
 			return (string)cmd.ExecuteScalar();
 		}
 
 		//Returnerar ett inläggs titel
-		public static string GetPostTitle(int index)
+		public static string GetPostTitle(string forum, int index)
 		{
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 
-			cmd.CommandText = "SELECT Title FROM Forum WHERE Postindex = @Postindex";
+			cmd.CommandText = $"SELECT Title FROM {forum} WHERE Postindex = @Postindex";
 			cmd.Parameters.AddWithValue("@Postindex", index);
 			return (string)cmd.ExecuteScalar();
 		}
 
 		//Returnerar ett inläggs brödtext
-		public static string GetPostText(int index)
+		public static string GetPostText(string forum, int index)
 		{
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 
-			cmd.CommandText = "SELECT Posttext FROM Forum WHERE Postindex = @Postindex";
+			cmd.CommandText = $"SELECT Posttext FROM {forum} WHERE Postindex = @Postindex";
 			cmd.Parameters.AddWithValue("@Postindex", index);
 			return (string)cmd.ExecuteScalar();
 		}
@@ -314,7 +314,7 @@ namespace projektASP.Models
         }
 
         //Skicka in -1 för denna användare, index för en posts användare
-		public static string GetPFP(HttpContext httpContext, int index)
+		public static string GetPFP(HttpContext httpContext, string forum, int index)
 		{
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
@@ -333,14 +333,22 @@ namespace projektASP.Models
             }
             else
             {
-				cmd.Parameters.AddWithValue("@Username", GetPostUser(index));
+				cmd.Parameters.AddWithValue("@Username", GetPostUser(forum, index));
 			}
-			
-			long avatarIndex = (long)cmd.ExecuteScalar();
+
+            long avatarIndex;
+            if(forum == "Forum") { 
+                avatarIndex = (long)cmd.ExecuteScalar(); 
+            }
+            else {
+				Random rnd = new Random();
+                avatarIndex = rnd.Next(1, 5);
+            }
+                
 			return $"/Pictures/Login-Register/{avatarIndex}.jpg";
 		}
 
-        public static bool PostSearch(string searchWord, int index)
+        public static bool PostSearch(string forum, string searchWord, int index)
         {
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
@@ -354,7 +362,7 @@ namespace projektASP.Models
             
             foreach(string category in categories)
             {
-				cmd.CommandText = $"SELECT COUNT(*) FROM Forum WHERE {category} LIKE @Search AND Postindex = @Postindex";
+				cmd.CommandText = $"SELECT COUNT(*) FROM {forum} WHERE {category} LIKE @Search AND Postindex = @Postindex";
 				
                 if ((long)cmd.ExecuteScalar() > 0)
 				{

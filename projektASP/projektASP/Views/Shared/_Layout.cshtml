@@ -20,9 +20,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @{
-                            if(SQlite.GetPFP(Context, -1) != "")
+                            if(SQlite.GetPFP(Context, "none", -1) != "")
                             {
-                                <img src=@SQlite.GetPFP(Context, -1) width="4%" style="border-radius: 20px;">
+                                <img src=@SQlite.GetPFP(Context, "none", -1) width="4%" style="border-radius: 20px;">
                             }
                         }
                         
