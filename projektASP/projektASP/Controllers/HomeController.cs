@@ -158,12 +158,28 @@ namespace projektASP.Controllers
 
         //Söka på forumet
         public void SearchPost()
-        {
-            if (Request.Method == "POST")
+		{
+			if (Request.Method == "POST")
+			{
+				string search = Request.Form["search"];
+				Response.Cookies.Append("Search", search);
+				Response.Redirect("Search");
+			}
+		}
+		public void LikePost()
+		{
+			if (Request.Method == "POST")
             {
-                string search = Request.Form["search"];
-                Response.Cookies.Append("Search", search);
-                Response.Redirect("Search");
+                int postindex = Int32.Parse(Request.Form["postindex"]);
+				string username = Request.Cookies["Username"];
+				if (!SQlite.GetIfUserLiked(postindex, username))
+                {
+					SQlite.LikePost(postindex, username);
+					Response.StatusCode = 200;
+				} else
+                {
+                    Response.StatusCode = 409;
+                }
             }
         }
 

@@ -37,7 +37,7 @@ namespace projektASP.Models
         public static void CreateTable(SqliteConnection conn)
         {
             SqliteCommand cmd;
-            string Createsql = "CREATE TABLE ForumFree(Postindex INTEGER, Time DATETIME, User TEXT, Title TEXT, Posttext TEXT)";
+            string Createsql = "CREATE TABLE Likes(Postindex INTEGER, User TEXT)";
             cmd = conn.CreateCommand();
             cmd.CommandText = Createsql;
             cmd.ExecuteNonQuery();
@@ -245,7 +245,7 @@ namespace projektASP.Models
 			cmd.Parameters.AddWithValue("@Title", title);
 			cmd.Parameters.AddWithValue("@Posttext", text);
 
-			int rowsAffected = cmd.ExecuteNonQuery();
+            int rowsAffected = cmd.ExecuteNonQuery();
 
 			return rowsAffected > 0;
         }
@@ -303,6 +303,31 @@ namespace projektASP.Models
 			cmd.Parameters.AddWithValue("@Postindex", index);
 			return (string)cmd.ExecuteScalar();
 		}
+
+        //Returnerar ett inläggs lajks
+        public static long GetPostLikes(int index)
+        {
+            SqliteConnection conn = CreateConnection();
+            SqliteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "SELECT COUNT(*) FROM Likes WHERE Postindex = @Postindex";
+			cmd.Parameters.AddWithValue("@Postindex", index);
+            return (long)cmd.ExecuteScalar();
+        }
+
+        //Returnerar om usern har likat en post
+        public static bool GetIfUserLiked(int index, string username)
+        {
+            SqliteConnection conn = CreateConnection();
+            SqliteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "SELECT COUNT(*) FROM Likes WHERE Postindex = @Postindex AND User = @User";
+			cmd.Parameters.AddWithValue("@Postindex", index);
+            cmd.Parameters.AddWithValue("@User", username);
+
+            long rowsFound = (long)cmd.ExecuteScalar();
+            return rowsFound > 0;
+        }
 
         public static string GetDailyMusic()
         {
@@ -378,5 +403,19 @@ namespace projektASP.Models
 			return httpContext.Request.Cookies["Search"];
 		}
 
-	}
+        public static bool LikePost(int postIndex, string username)
+        {
+            SqliteConnection conn = CreateConnection();
+            SqliteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "INSERT INTO Likes (Postindex, User) VALUES (@Postindex, @User)";
+			cmd.Parameters.AddWithValue("@Postindex", postIndex);
+            cmd.Parameters.AddWithValue("@User", username);
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            return rowsAffected > 0;
+        }
+
+    }
 }
