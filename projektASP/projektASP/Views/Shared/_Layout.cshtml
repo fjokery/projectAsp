@@ -43,8 +43,8 @@
                         @SQlite.GetUsername(Context)
 
 
-                        <a class="nav-link text-white loginButton" style="display: @SQlite.LoginOrUser(Context); font-family: 'Comic Sans MS';" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                        <a class="nav-link text-white loginButton" style="display: @SQlite.ShowLogoutButton(Context); font-family: 'Comic Sans MS';" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                        <a class="nav-link text-white loginButton" style="display: @SQlite.HiddenIfLoggedIn(Context); font-family: 'Comic Sans MS';" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        <a class="nav-link text-white loginButton" style="display: @SQlite.VisibleIfLoggedIn(Context); font-family: 'Comic Sans MS';" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
 
                     </ul>
 

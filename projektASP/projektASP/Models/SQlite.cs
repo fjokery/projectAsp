@@ -194,7 +194,7 @@ namespace projektASP.Models
         }
 
         //Returnerar om Loginknappen ska visas
-        public static string LoginOrUser(HttpContext httpContext) 
+        public static string HiddenIfLoggedIn(HttpContext httpContext) 
         {
             if (SQlite.GetUsername(httpContext) == null)
             {
@@ -204,7 +204,7 @@ namespace projektASP.Models
         }
 
         //Returnerar om Logoutknappen ska visas
-        public static string ShowLogoutButton(HttpContext httpContext)
+        public static string VisibleIfLoggedIn(HttpContext httpContext)
         {
 
             if (SQlite.GetUsername(httpContext) != null)

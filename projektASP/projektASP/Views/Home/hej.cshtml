@@ -53,7 +53,7 @@
 					@SQlite.GetPostTime("Forum", i)
 				<div class="fictional-toenail-container">
 					<p id="like-number-@i">@SQlite.GetPostLikes(i)</p>
-					<button type="button" onclick="likePost(@i)">Click Me!</button>
+					<button type="button" onclick="likePost(@i)" style="display: @SQlite.VisibleIfLoggedIn(Context)">Like</button>
 				</div>
 			</div>
 			</div>
