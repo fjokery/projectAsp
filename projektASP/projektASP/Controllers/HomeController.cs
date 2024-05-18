@@ -171,13 +171,15 @@ namespace projektASP.Controllers
 			if (Request.Method == "POST")
             {
                 int postindex = Int32.Parse(Request.Form["postindex"]);
-				string forum = Request.Form["forum"];
 				string username = Request.Cookies["Username"];
-				if (!SQlite.GetIfUserLiked(forum, postindex, username))
+				if (!SQlite.GetIfUserLiked(postindex, username))
                 {
-					SQlite.LikePost(forum, postindex, username);
+					SQlite.LikePost(postindex, username);
 					Response.StatusCode = 200;
-				}
+				} else
+                {
+                    Response.StatusCode = 409;
+                }
             }
         }
 

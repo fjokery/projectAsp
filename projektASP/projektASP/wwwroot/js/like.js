@@ -1,4 +1,4 @@
-function likePost(forum, postindex) {
+function likePost(postindex) {
 	// Create a new XMLHttpRequest object
 	var xhr = new XMLHttpRequest();
 
@@ -12,14 +12,18 @@ function likePost(forum, postindex) {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === XMLHttpRequest.DONE) {
 			if (xhr.status === 200) {
-
-			} else {
+				let likenumberElement = document.getElementById("like-number-" + postindex);
+				let likenumber = parseInt(likenumberElement.innerHTML);
+				likenumberElement.innerHTML = likenumber + 1;
+			} else if (xhr.status === 409) {
 				// Request failed, handle errors if needed
-				alert("Failed to like post.")
+				alert("You already liked this post.");
+			} else {
+				alert("There was an error liking this post.")
 			}
 		}
 	};
 
 	// Send the request
-	xhr.send("forum=" + forum + "&postindex=" + postindex);
+	xhr.send("postindex=" + postindex);
 }

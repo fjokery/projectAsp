@@ -25,7 +25,6 @@ namespace projektASP.Models
             try
             {
                 sqlite_conn.Open();
-                CreateTable(sqlite_conn);
             }
             catch (Exception ex)
             {
@@ -38,7 +37,7 @@ namespace projektASP.Models
         public static void CreateTable(SqliteConnection conn)
         {
             SqliteCommand cmd;
-            string Createsql = "CREATE TABLE Likes(Forum TEXT, Postindex INTEGER, User TEXT)";
+            string Createsql = "CREATE TABLE Likes(Postindex INTEGER, User TEXT)";
             cmd = conn.CreateCommand();
             cmd.CommandText = Createsql;
             cmd.ExecuteNonQuery();
@@ -306,25 +305,23 @@ namespace projektASP.Models
 		}
 
         //Returnerar ett inläggs lajks
-        public static long GetPostLikes(string forum, int index)
+        public static long GetPostLikes(int index)
         {
             SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "SELECT COUNT(*) FROM Likes WHERE Forum = @Forum AND Postindex = @Postindex";
-			cmd.Parameters.AddWithValue("@Forum", forum);
+            cmd.CommandText = "SELECT COUNT(*) FROM Likes WHERE Postindex = @Postindex";
 			cmd.Parameters.AddWithValue("@Postindex", index);
             return (long)cmd.ExecuteScalar();
         }
 
         //Returnerar om usern har likat en post
-        public static bool GetIfUserLiked(string forum, int index, string username)
+        public static bool GetIfUserLiked(int index, string username)
         {
             SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "SELECT COUNT(*) FROM Likes WHERE Forum = @Forum AND Postindex = @Postindex AND User = @User";
-			cmd.Parameters.AddWithValue("@Forum", forum);
+            cmd.CommandText = "SELECT COUNT(*) FROM Likes WHERE Postindex = @Postindex AND User = @User";
 			cmd.Parameters.AddWithValue("@Postindex", index);
             cmd.Parameters.AddWithValue("@User", username);
 
@@ -406,13 +403,12 @@ namespace projektASP.Models
 			return httpContext.Request.Cookies["Search"];
 		}
 
-        public static bool LikePost(string forum, int postIndex, string username)
+        public static bool LikePost(int postIndex, string username)
         {
             SqliteConnection conn = CreateConnection();
             SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "INSERT INTO Likes (Forum, Postindex, User) VALUES (@Forum, @Postindex, @User)";
-			cmd.Parameters.AddWithValue("@Forum", forum);
+            cmd.CommandText = "INSERT INTO Likes (Postindex, User) VALUES (@Postindex, @User)";
 			cmd.Parameters.AddWithValue("@Postindex", postIndex);
             cmd.Parameters.AddWithValue("@User", username);
 
