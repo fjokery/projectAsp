@@ -51,9 +51,14 @@
 			<br>
 			<div class="fictional-footer-container">
 					@SQlite.GetPostTime("Forum", i)
-				<button type="button">Click Me!</button>
+				<div class="fictional-toenail-container">
+					@SQlite.GetPostLikes("Forum", i)
+					<button type="button" onclick="likePost('Forum', @i)">Click Me!</button>
+				</div>
 			</div>
 			</div>
 	}
 }
 </div>
+
+<script src="~/js/like.js"></script>
