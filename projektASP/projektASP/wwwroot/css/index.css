@@ -67,3 +67,8 @@ body {
     align-items: center;
     text-align: center;
 }
+
+.poll-box {
+    display: flex;
+    flex-flow: column;
+}

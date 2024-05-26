@@ -32,15 +32,15 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index" style="font-family: 'Comic Sans MS';">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="hej" style="font-family: 'Comic Sans MS';">Forum</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="hej" style="font-family: 'Comic Sans MS';">Elite Forum</a>
                         </li>
                         <!--Den här ska bytas ut mot en logotyp som man kan klicka och komma till home! (därmed behöver vi inte "home" knappen och kan utnyttja den till annat-->
                         <!--OBS! den ska ligga i mitten-->
                         <a class="navbar-item" asp-area="" asp-controller="Home" asp-action="Index" style="font-family: 'Comic Sans MS';"> <img class="logo" src="/Pictures/Index/logo.png" width="100px" /> </a>
 
-                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy" style="font-family: 'Comic Sans MS';">Privacy</a>
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy" style="font-family: 'Comic Sans MS';">Open Forum</a>
 
-                        @SQlite.GetUsername(Context)
+                        <div style="Color: white;">@SQlite.GetUsername(Context)</div>
 
 
                         <a class="nav-link text-white loginButton" style="display: @SQlite.HiddenIfLoggedIn(Context); font-family: 'Comic Sans MS';" asp-area="" asp-controller="Home" asp-action="Login">Login</a>

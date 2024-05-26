@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using projektASP.Models;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Web;
 
 namespace projektASP.Controllers
@@ -183,8 +185,33 @@ namespace projektASP.Controllers
             }
         }
 
+		//Vote
+		public void OnVote()
+		{
+			if (Request.Method == "POST")
+			{
+				if (Request.Form["vote"].ToString() != null && Request.Cookies["Username"] != null)
+				{
+					string selection = (Request.Form["vote"].ToString());
+					string username = Request.Cookies["Username"];
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+					if (!SQlite.GetIfUserVoted(username))
+					{
+                        SQlite.AddVote(selection, username);
+						Debug.WriteLine(selection);
+						Response.Redirect("index");
+					} 
+                    else 
+                    {
+                        SQlite.ChangeVote(selection, username);
+                    }
+				}
+				Response.Redirect("index");
+			}
+		}
+
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

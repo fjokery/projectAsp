@@ -6,9 +6,9 @@
 	
 	<form method="post" asp-controller="Home" asp-action="CreatePost">
 		<div class="create-post-box">
-			<label for="fname">Skapa ett inlägg som <b>@SQlite.GetUsername(Context)</b></label><br>
+			<label for="fname">Create post as <b>@SQlite.GetUsername(Context)</b></label><br>
 			<br>
-			<p><b>Titel</b></p>
+			<p><b>Title</b></p>
 			<input type="text" name="title" size="40" maxlength="100"/><br>
 			<br>
 			<p><b>Text</b></p>
@@ -22,7 +22,7 @@
 
 } else
 {
-		<p><b>Oobs! måste logga in för att posta i forumet!</b></p>
+		<p><b>You need to be logged in to create posts in this forum!</b></p>
 }
 
 <!-- Mae will watch isak make a searchbar here -->
@@ -50,11 +50,14 @@
 				<p>@SQlite.GetPostText("Forum", i)</p>
 			<br>
 			<div class="fictional-footer-container">
+			<br>
+					<br>
 					@SQlite.GetPostTime("Forum", i)
 				<div class="fictional-toenail-container">
 					<p id="like-number-@i">@SQlite.GetPostLikes(i)</p>
 					<button  type="button" onclick="likePost(@i)" style="display: @SQlite.VisibleIfLoggedIn(Context)">Like</button>
 				</div>
+
 			</div>
 			</div>
 	}

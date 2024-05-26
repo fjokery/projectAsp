@@ -5,11 +5,11 @@
 
 		<form method="post" asp-controller="Home" asp-action="CreatePost">
 			<div class="create-post-box">
-				<label for="fname">Skapa ett inlägg</b></label><br>
+				<label for="fname">Create post</b></label><br>
 				<br>
-				<p><b>Namn</b></p>
+				<p><b>Name</b></p>
 				<input type="text" name="name" size="40" maxlength="100" /><br>
-				<p><b>Titel</b></p>
+				<p><b>Title</b></p>
 				<input type="text" name="title" size="40" maxlength="100" /><br>
 				<br>
 				<p><b>Text</b></p>
@@ -27,9 +27,9 @@
 
 	<form method="post" asp-controller="Home" asp-action="SearchPost">
 		<div class="searchbar">
-			<p><b>Sök</b></p>
+			<p><b>Search</b></p>
 			<input type="text" name="search" size="80" />
-			<input type="submit" value="Sök" style="color: white; border-radius: 10px; background-color: green;">
+			<input type="submit" value="Search" style="color: white; border-radius: 10px; background-color: green;">
 		</div>
 	</form>
 
@@ -48,7 +48,6 @@
 				<br>
 				<div class="fictional-footer-container">
 					@SQlite.GetPostTime("ForumFree", i)
-					<button type="button">Click Me!</button>
 				</div>
 			</div>
 		}

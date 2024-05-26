@@ -16,15 +16,23 @@
 
 @{
 	string search = SQlite.GetSearchCookie(Context);
-		<h1>Sökresultat för <b>@search</b></h1>
+		<h1>Search results for: <b>@search</b></h1>
 
 		string[] forums = new string[2] { "Forum", "ForumFree"};
+		string visibility = "block";
+
 		foreach(string forum in forums)
 		{
 			for (int i = (int)SQlite.GetTotalPostAmount(forum); i >= 0; i--)
 			{
 
 				if (SQlite.GetPostText(forum, i) == null || SQlite.GetPostText(forum, i) == "") { continue; }
+
+				if (forum == "ForumFree")
+				{
+					visibility = "none";
+				}
+				else visibility = "block";
 
 				if (SQlite.PostSearch(forum, search, i))
 				{
@@ -38,16 +46,17 @@
 						<br>
 						<div class="fictional-footer-container">
 							@SQlite.GetPostTime("Forum", i)
+							
+							
 							<div class="fictional-toenail-container">
-								<p id="like-number-@i">@SQlite.GetPostLikes(i)</p>
-								<button type="button" onclick="likePost(@i)">Click Me!</button>
+								<p id="like-number-@i" style="display: @visibility">@SQlite.GetPostLikes(i)</p>
+								<button type="button" onclick="likePost(@i)" style="display: @visibility">Like</button>
 							</div>
+							
 						</div>
 					</div>
 				}
 			}
-
-			<p>----------------------------------------</p>
 		}
 
 	

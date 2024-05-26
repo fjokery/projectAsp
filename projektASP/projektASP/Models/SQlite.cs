@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace projektASP.Models
 {
@@ -37,7 +38,7 @@ namespace projektASP.Models
         public static void CreateTable(SqliteConnection conn)
         {
             SqliteCommand cmd;
-            string Createsql = "CREATE TABLE Likes(Postindex INTEGER, User TEXT)";
+            string Createsql = "CREATE TABLE Votes(User TEXT, Artist TEXT)";
             cmd = conn.CreateCommand();
             cmd.CommandText = Createsql;
             cmd.ExecuteNonQuery();
@@ -54,13 +55,13 @@ namespace projektASP.Models
             cmd.ExecuteNonQuery();
         }
 
-        //Tömmer en tabell (ANVÄND INTE)
+        //Tömmer en tabell (ANVÄND INTE OM DU INTE ÄR ISAK)
         public static void EmptyTable()
         {
 			SqliteConnection conn = CreateConnection();
 			SqliteCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "DELETE FROM Forum";
+            cmd.CommandText = "DELETE FROM Votes";
             cmd.ExecuteNonQuery();
 		}
 
@@ -417,5 +418,54 @@ namespace projektASP.Models
             return rowsAffected > 0;
         }
 
-    }
+		public static bool GetIfUserVoted(string username)
+		{
+			SqliteConnection conn = CreateConnection();
+			SqliteCommand cmd = conn.CreateCommand();
+
+			cmd.CommandText = "SELECT COUNT(*) FROM Votes WHERE User = @User";
+			cmd.Parameters.AddWithValue("@User", username);
+
+			long rowsFound = (long)cmd.ExecuteScalar();
+			return rowsFound > 0;
+		}
+
+        public static void AddVote(string artist, string username) 
+        {
+			SqliteConnection conn = CreateConnection();
+			SqliteCommand cmd = conn.CreateCommand();
+
+			cmd.CommandText = "INSERT INTO Votes(Artist, User) VALUES(@Artist, @User)";
+			cmd.Parameters.AddWithValue("@Artist", artist);
+			cmd.Parameters.AddWithValue("@User", username);
+
+            cmd.ExecuteNonQuery();
+		}
+
+		public static string CountVote(string artist)
+		{
+			SqliteConnection conn = CreateConnection();
+			SqliteCommand cmd = conn.CreateCommand();
+
+			cmd.CommandText = "SELECT COUNT(*) FROM Votes WHERE ARTIST = @Artist";
+			cmd.Parameters.AddWithValue("@Artist", artist);
+
+            if (cmd.ExecuteScalar != null)
+            {
+                return cmd.ExecuteScalar().ToString();
+            } else return "0";
+		}
+
+		public static void ChangeVote(string artist, string username)
+		{
+			SqliteConnection conn = CreateConnection();
+			SqliteCommand cmd = conn.CreateCommand();
+
+			cmd.CommandText = "UPDATE Votes SET Artist = @Artist WHERE User = @User";
+			cmd.Parameters.AddWithValue("@Artist", artist);
+			cmd.Parameters.AddWithValue("@User", username);
+
+			cmd.ExecuteNonQuery();
+		}
+	}
 }
