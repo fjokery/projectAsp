@@ -152,7 +152,6 @@ namespace projektASP.Models
             {
                 return false;
             }
-
         }
 
         //Registrera användare
