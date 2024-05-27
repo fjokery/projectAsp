@@ -26,7 +26,7 @@
 			for (int i = (int)SQlite.GetTotalPostAmount(forum); i >= 0; i--)
 			{
 
-				if (SQlite.GetPostText(forum, i) == null || SQlite.GetPostText(forum, i) == "") { continue; }
+				if (SQlite.GetPostInfo(forum, i, "Posttext") == null || SQlite.GetPostInfo(forum, i, "Posttext") == "") { continue; }
 
 				if (forum == "ForumFree")
 				{
@@ -39,10 +39,10 @@
 					<div class="post-box">
 						<div class="user-container">
 							<img src=@SQlite.GetPFP(Context, forum, i) width="7%" style="border-radius: 20px;">
-							<h3>@SQlite.GetPostUser(forum, i)</h3>
+							<h3>@SQlite.GetPostInfo(forum, i, "User")</h3>
 						</div>
-						<p><h2>@SQlite.GetPostTitle(forum, i)</h2></p>
-						<p>@SQlite.GetPostText(forum, i)</p>
+						<p><h2>@SQlite.GetPostInfo(forum, i, "Title")</h2></p>
+						<p>@SQlite.GetPostInfo(forum, i, "Posttext")</p>
 						<br>
 						<div class="fictional-footer-container">
 							@SQlite.GetPostTime("Forum", i)

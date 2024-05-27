@@ -40,14 +40,14 @@
 @{
 	for (int i = (int)SQlite.GetTotalPostAmount("Forum"); i >= 0; i--)
 	{
-		if (SQlite.GetPostText("Forum", i) == null || SQlite.GetPostText("Forum", i) == "") { continue; }
+		if (SQlite.GetPostInfo("Forum", i, "Posttext") == null || SQlite.GetPostInfo("Forum", i, "Posttext") == "") { continue; }
 			<div class="post-box">
 				<div class="user-container">
 					<img src=@SQlite.GetPFP(Context, "Forum", i) width="7%" style="border-radius: 20px;">
-					<h3>@SQlite.GetPostUser("Forum", i)</h3>
+					<h3>@SQlite.GetPostInfo("Forum", i, "User")</h3>
 				</div>
-				<p><h2>@SQlite.GetPostTitle("Forum", i)</h2></p>
-				<p>@SQlite.GetPostText("Forum", i)</p>
+				<p><h2>@SQlite.GetPostInfo("Forum", i, "Title")</h2></p>
+				<p>@SQlite.GetPostInfo("Forum", i, "Posttext")</p>
 			<br>
 			<div class="fictional-footer-container">
 			<br>
