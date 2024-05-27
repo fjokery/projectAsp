@@ -50,7 +50,7 @@
 							
 							<div class="fictional-toenail-container">
 								<p id="like-number-@i" style="display: @visibility">@SQlite.GetPostLikes(i)</p>
-								<button type="button" onclick="likePost(@i)" style="display: @visibility">Like</button>
+								<button type="button" onclick="likePost(@i)" style="display: @SQlite.VisibleIfLoggedIn(Context)">Like</button>
 							</div>
 							
 						</div>
