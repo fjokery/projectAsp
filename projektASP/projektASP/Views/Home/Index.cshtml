@@ -105,7 +105,8 @@
 			<p>
 				@SQlite.CountVote("samuel")
 			</p>
-			<button type="submit">Vote!</button>
+			<button type="submit" ">Vote!</button>
+			<label style="display: @SQlite.HiddenIfLoggedIn(Context)">You need to be logged in to vote</label>
 		</div>
 	</form>
 

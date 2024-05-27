@@ -45,7 +45,7 @@ namespace projektASP.Models
         }
 
 
-        //Skapa nytt fält (använd inte)
+        //Skapa nytt fält (används inte)
         public static void CreateField(SqliteConnection conn)
         {
             SqliteCommand cmd;
@@ -114,9 +114,8 @@ namespace projektASP.Models
 
         public static string HashPassword(string username, string password)
         {
-			// Generate a 128-bit salt using a sequence of
-			// cryptographically strong random bytes.
-			byte[] salt = Encoding.ASCII.GetBytes(username); // divide by 8 to convert bits to bytes
+			//Genererar ett salt utifrån användarnamnet (mycket säkert jag lovar)
+			byte[] salt = Encoding.ASCII.GetBytes(username); 
 
 			// derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
 			string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -131,7 +130,7 @@ namespace projektASP.Models
 
 
 
-        //login
+        //Login
         public static bool Login(string username, string password)
         {
             string hashedPassword = HashPassword(username, password);
@@ -156,7 +155,7 @@ namespace projektASP.Models
 
         }
 
-        //registerara anv'ndare
+        //Registrera användare
         public static bool Register(string username, string email, string password, int avatar)
         {
 			SqliteConnection conn = CreateConnection();
@@ -194,7 +193,7 @@ namespace projektASP.Models
             }
         }
 
-        //Returnerar om Loginknappen ska visas
+        //Returnerar att ett element ska döljas om man är inloggad
         public static string HiddenIfLoggedIn(HttpContext httpContext) 
         {
             if (SQlite.GetUsername(httpContext) == null)
@@ -204,8 +203,8 @@ namespace projektASP.Models
             else { return "none"; }
         }
 
-        //Returnerar om Logoutknappen ska visas
-        public static string VisibleIfLoggedIn(HttpContext httpContext)
+		//Returnerar att ett element ska visas om man är inloggad
+		public static string VisibleIfLoggedIn(HttpContext httpContext)
         {
 
             if (SQlite.GetUsername(httpContext) != null)
@@ -353,6 +352,7 @@ namespace projektASP.Models
                 if (name != null)
                 {
                     cmd.Parameters.AddWithValue("@Username", name);
+                    return $"/Pictures/Login-Register/{(long)cmd.ExecuteScalar()}.jpg";
                 }
                 else { return ""; }
 				
@@ -374,6 +374,7 @@ namespace projektASP.Models
 			return $"/Pictures/Login-Register/{avatarIndex}.jpg";
 		}
 
+        //Sökfunktionen
         public static bool PostSearch(string forum, string searchWord, int index)
         {
 			SqliteConnection conn = CreateConnection();
@@ -399,11 +400,13 @@ namespace projektASP.Models
             return false;
 		}
 
+        //Returnerar den nuvarande söktermen
         public static string GetSearchCookie(HttpContext httpContext)
         {
 			return httpContext.Request.Cookies["Search"];
 		}
 
+        //Likear inlägg i databasen
         public static bool LikePost(int postIndex, string username)
         {
             SqliteConnection conn = CreateConnection();
@@ -418,6 +421,7 @@ namespace projektASP.Models
             return rowsAffected > 0;
         }
 
+        //Returnerar om en användare har röstat
 		public static bool GetIfUserVoted(string username)
 		{
 			SqliteConnection conn = CreateConnection();
@@ -430,6 +434,7 @@ namespace projektASP.Models
 			return rowsFound > 0;
 		}
 
+        //Lägger inskickade användarens röst på inskickade artisten
         public static void AddVote(string artist, string username) 
         {
 			SqliteConnection conn = CreateConnection();
@@ -442,6 +447,7 @@ namespace projektASP.Models
             cmd.ExecuteNonQuery();
 		}
 
+        //Räknar en artists röster
 		public static string CountVote(string artist)
 		{
 			SqliteConnection conn = CreateConnection();
