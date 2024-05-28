@@ -101,7 +101,7 @@ namespace projektASP.Controllers
         {
             if(Request.Method == "POST")
             {
-				//Tar anv�ndarnamn mail och l�senord fr�n textrutor p� loginsidan
+				//Tar anv�ndarnamn mail avatar och l�senord fr�n textrutor p� loginsidan
 				string username = Request.Form["regUsernameInput"];
                 string email = Request.Form["regEmailInput"];
                 string password = Request.Form["regPasswordInput"];
