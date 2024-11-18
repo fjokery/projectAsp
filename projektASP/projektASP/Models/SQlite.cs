@@ -243,6 +243,7 @@ namespace projektASP.Models
 			cmd.Parameters.AddWithValue("@User", username);
 			cmd.Parameters.AddWithValue("@Title", title);
 			cmd.Parameters.AddWithValue("@Posttext", text);
+            Console.WriteLine(username);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
