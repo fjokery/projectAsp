@@ -133,8 +133,12 @@ namespace projektASP.Controllers
 				string title = Request.Form["title"];
 				string text = Request.Form["text"];
                 string forum = Request.Form["forum"];
-                string name;
-                try { name = Request.Form["name"]; } catch (InvalidOperationException) { name = Request.Cookies["Username"]; }
+                string name = Request.Form["name"];
+
+                if (name == null)
+                {
+                    name = Request.Cookies["Username"];
+                }
 
 				bool posted = SQlite.CreatePost(forum, title, text, name);
 
